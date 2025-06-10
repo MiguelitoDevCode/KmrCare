@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap");
+@import "tailwindcss";
+@layer components {
+  .all-\[unset\] {
+    all: unset;
+  }
+}
+@theme {
+  --color-primary:  #37A936;
+  --color-secondary: #10425d;
+  --accent: rgba(191, 210, 248, 1);
+  --black: rgba(33, 33, 36, 1);
+  --body-2-font-family: "Poppins", sans-serif;
+  --body-2-font-size: 18px;
+  --body-2-font-style: normal;
+  --body-2-font-weight: 400;
+  --body-2-letter-spacing: 0px;
+  --body-2-line-height: 140%;
+  --body-font-family: "Poppins", sans-serif;
+  --body-font-size: 16px;
+  --body-font-style: normal;
+  --body-font-weight: 400;
+  --body-letter-spacing: 0px;
+  --body-line-height: 140%;
+  --button-text-font-family: "Poppins", sans-serif;
+  --button-text-font-size: 14px;
+  --button-text-font-style: normal;
+  --button-text-font-weight: 500;
+  --button-text-letter-spacing: 0px;
+  --button-text-line-height: normal;
+  --caption-font-family: "Poppins", sans-serif;
+  --caption-font-size: 18px;
+  --caption-font-style: normal;
+  --caption-font-weight: 700;
+  --caption-letter-spacing: 2.88px;
+  --caption-line-height: normal;
+  --display-2-font-family: "Poppins", sans-serif;
+  --display-2-font-size: 32px;
+  --display-2-font-style: normal;
+  --display-2-font-weight: 400;
+  --display-2-letter-spacing: 0px;
+  --display-2-line-height: normal;
+  --primary: rgba(31, 43, 108, 1);
+  --secondary: rgba(21, 158, 236, 1);
+  --small-font-family: "Poppins", sans-serif;
+  --small-font-size: 14px;
+  --small-font-style: normal;
+  --small-font-weight: 400;
+  --small-letter-spacing: 0px;
+  --small-line-height: normal;
+  --title-font-family: "Work Sans", Helvetica;
+  --title-font-size: 26px;
+  --title-font-style: normal;
+  --title-font-weight: 500;
+  --title-letter-spacing: 0px;
+  --title-line-height: normal;
+  --white: rgba(252, 254, 254, 1);
+}
+body {
+  /*background-color: black;*/
+  color: white;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/*.hover-animation {
+  @apply hover:-translate-y-1 duration-200;
+}*/
+
+/* Navigation */
+.nav-ul {
+  @apply flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20;
+}
+
+.nav-li {
+  @apply text-secondary hover:text-[#0b9444] max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5;
+}
+
+.nav-link {
+  @apply text-lg md:text-base hover:border-b-3 transition-colors;
+}
+/* Button Components */
+.btn {
+  @apply relative p-3 text-sm text-center font-bold rounded-sm bg-[#0b9444] hover:bg-[#ffffff] hover:text-secondary hover:border-2 transition-colors w-[12rem] cursor-pointer overflow-hidden;
+}
+
