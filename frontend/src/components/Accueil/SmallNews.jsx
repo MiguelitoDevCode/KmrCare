@@ -15,13 +15,8 @@ export const SmallNews = ({
 }) => {
   return (
     <div
-      className={`w-[446px] h-[154px] rounded-[5px] bg-white relative ${property1 === "hovered" ? "shadow-[0px_0px_20px_#0000000d]" : ""} ${className}`}
+      className={`w-auto h-[154px] rounded-[5px] bg-white relative ${property1 === "hovered" ? "shadow-[0px_0px_20px_#0000000d]" : ""} ${className}`}
     >
-      <img
-        className="w-40 left-0 top-0 h-[154px] absolute"
-        alt="Rectangle"
-        src={property1 === "hovered" ? rectangle : img}
-      />
 
       <div
         className={`w-[278px] left-[180px] top-5 h-[114px] absolute ${groupClassName}`}

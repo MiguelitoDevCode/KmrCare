@@ -1,121 +1,135 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { motion } from "motion/react";
 
 export const FooterWrapper = ({
   className,
   text = "© 2025 KmrCare name All Rights Reserved by MIGUELITO DevCode & Team 91",
 }) => {
   return (
-    <div className={`relative w-full h-[427px] bg-[#0b9444] ${className}`}>
-      <div className="absolute w-[309px] h-[85px] top-[70px] left-[67px]">
-        <div className="absolute w-[244px] top-0 left-0 [font-family:'Yeseva_One',Helvetica] font-normal text-[#0f425d] text-4xl tracking-[0] leading-[normal]">
-          KMRCARE
+    <div className={`bg-[#0b9444] text-white p-8 md:p-12 ${className}`}>
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Section Logo et Description */}
+        <div className="mb-6 md:mb-0">
+          <h2 className="text-4xl font-yeseva-one text-[#0f425d] mb-2">
+            KMRCARE
+          </h2>
+          <p className="font-body-2 text-sm">
+            Votre santé, simplifiée à Douala
+          </p>
         </div>
 
-        <p className="absolute w-[305px] top-[60px] left-0 font-body-2 font-[number:var(--body-2-font-weight)] text-white text-[length:var(--body-2-font-size)] tracking-[var(--body-2-letter-spacing)] leading-[var(--body-2-line-height)] [font-style:var(--body-2-font-style)]">
-          Votre santé, simplifiée à Douala
-        </p>
-      </div>
-
-      <div className="absolute w-[182px] h-[140px] top-[70px] left-[394px]">
-        <div className="absolute w-[180px] top-0 left-0 [font-family:'Work_Sans',Helvetica] font-semibold text-white text-lg tracking-[0] leading-[normal]">
-          Liens Utiles
+        {/* Section Liens Utiles */}
+        <div className="mb-6 md:mb-0">
+          <h3 className="text-lg font-semibold font-work-sans mb-4">
+            Liens Utiles
+          </h3>
+          <ul className="space-y-2 font-body text-sm">
+            <li><a href="#" className="hover:underline">A Propos</a></li>
+            <li><a href="#" className="hover:underline">Dispensaires</a></li>
+            <li><a href="#" className="hover:underline">Contact</a></li>
+          </ul>
         </div>
 
-        <div className="absolute w-[137px] h-20 top-[60px] left-0">
-          <div className="absolute w-[130px] top-0 left-0 font-body font-[number:var(--body-font-weight)] text-white text-[length:var(--body-font-size)] tracking-[var(--body-letter-spacing)] leading-[var(--body-line-height)] [font-style:var(--body-font-style)]">
-            A Propos
-          </div>
-
-          <div className="absolute w-[109px] top-[29px] left-0 font-body font-[number:var(--body-font-weight)] text-white text-[length:var(--body-font-size)] tracking-[var(--body-letter-spacing)] leading-[var(--body-line-height)] [font-style:var(--body-font-style)]">
-            Dispensaires
-          </div>
-
-          <div className="absolute w-[99px] top-[58px] left-0 font-body font-[number:var(--body-font-weight)] text-white text-[length:var(--body-font-size)] tracking-[var(--body-letter-spacing)] leading-[var(--body-line-height)] whitespace-nowrap [font-style:var(--body-font-style)]">
-            Contact
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute w-[622px] h-[169px] top-[70px] left-[590px]">
-        <div className="absolute w-[301px] h-[169px] top-0 left-0">
-          <div className="absolute w-[125px] top-0 left-0 [font-family:'Work_Sans',Helvetica] font-semibold text-white text-lg tracking-[0] leading-[normal]">
+        {/* Section Contact Us */}
+        <div className="mb-6 md:mb-0">
+          <h3 className="text-lg font-semibold font-work-sans mb-4">
             Contact Us
-          </div>
-
-          <div className="absolute w-[307px] h-[109px] top-[60px] left-0">
-            <div className="absolute w-[226px] top-0 left-0 font-body font-[number:var(--body-font-weight)] text-white text-[length:var(--body-font-size)] tracking-[var(--body-letter-spacing)] leading-[var(--body-line-height)] [font-style:var(--body-font-style)]">
-              Call: (237) 657-755-890
-            </div>
-
-            <div className="absolute w-[299px] top-[29px] left-0 font-body font-[number:var(--body-font-weight)] text-white text-[length:var(--body-font-size)] tracking-[var(--body-letter-spacing)] leading-[var(--body-line-height)] [font-style:var(--body-font-style)]">
-              Email: www.kmrcare.com
-            </div>
-
-            <div className="absolute w-[262px] top-[58px] left-0 font-body font-[number:var(--body-font-weight)] text-white text-[length:var(--body-font-size)] tracking-[var(--body-letter-spacing)] leading-[var(--body-line-height)] [font-style:var(--body-font-style)]">
-              Address: 0123 Douala Akwa
-            </div>
-
-            <div className="absolute w-[169px] top-[87px] left-0 font-body font-[number:var(--body-font-weight)] text-white text-[length:var(--body-font-size)] tracking-[var(--body-letter-spacing)] leading-[var(--body-line-height)] [font-style:var(--body-font-style)]">
-              Support technique
-            </div>
-          </div>
+          </h3>
+          <ul className="space-y-2 font-body text-sm">
+            <li>Call: (237) 657-755-890</li>
+            <li>Email: www.kmrcare.com</li>
+            <li>Address: 0123 Douala Akwa</li>
+            <li>Support technique</li>
+          </ul>
         </div>
 
-        <div className="absolute w-[346px] h-[110px] top-0 left-[276px]">
-          <div className="absolute w-[124px] top-0 left-0 [font-family:'Work_Sans',Helvetica] font-semibold text-white text-lg tracking-[0] leading-[normal]">
+        {/* Section Newsletter */}
+        <div>
+          <h3 className="text-lg font-semibold font-work-sans mb-4">
             Newsletter
-          </div>
-
-          <div className="absolute w-[346px] h-[50px] top-[60px] left-0">
-            <div className="relative w-[344px] h-[50px] bg-[#fcfefe] rounded-[5px]">
-              <input
-              id="name"
-              name="name"
-              type="text"
-              className="outline-none p-3 w-[287px] h-[50px] bg-[#fcfefe] text-primary font-semibold rounded-[5px]"
-              placeholder="Enter your Email Adrress"
-              autoComplete="name"
+          </h3>
+          <div className="flex">
+            <input
+              id="newsletter-email"
+              name="newsletter-email"
+              type="email"
+              className="outline-none p-3 w-full bg-[#fcfefe] text-primary font-semibold rounded-l-md text-sm placeholder-gray-500"
+              placeholder="Enter your Email Address"
+              autoComplete="email"
               required
-              />
+            />
+            <button
+              type="button"
+              className="bg-[#fcfefe] p-3 rounded-r-md hover:scale-110 transition-all"
+            >
               <img
-                className="absolute w-[37px] h-[29px] top-[9px] left-[292px] hover:scale-110 transition-all"
-                alt="Vector"
-                src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-22.svg"
+                className="w-6 h-6"
+                alt="Submit"
+                src="/assets/send.svg"
               />
-            </div>
+            </button>
           </div>
         </div>
       </div>
 
-      <img
-        className="absolute w-[1255px] h-px top-[286px] left-[27px] object-cover"
-        alt="Vector"
-        src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-1-1.svg"
-      />
-
-      <img
-        className="absolute w-6 h-6 top-[330px] left-[1110px]"
-        alt="Vector"
-        src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-16.svg"
-      />
-
-      <img
-        className="absolute w-6 h-6 top-[330px] left-[1145px]"
-        alt="Vector"
-        src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-25.svg"
-      />
-
-      <img
-        className="absolute w-6 h-6 top-[330px] left-[1181px]"
-        alt="Vector"
-        src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-21.svg"
-      />
-
-      <p className="absolute w-[579px] top-[331px] left-[37px] [font-family:'Work_Sans',Helvetica] font-normal text-white text-base tracking-[0] leading-[normal]">
-        {text}
-      </p>
+      {/* Séparateur et Copyright */}
+      <div className="container mx-auto mt-8 pt-8 border-t border-white/50 flex flex-col md:flex-row justify-between items-center">
+        <p className="font-work-sans text-base text-center md:text-left mb-4 md:mb-0">
+          {text}
+        </p>
+        <div className="flex space-x-4">
+          <motion.a
+            href="#"
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 1.05 }}
+            className="cursor-pointer"
+          >
+            <img
+              className="w-6 h-6"
+              alt="Facebook"
+              src="/assets/facebook.svg"
+            />
+          </motion.a>
+          <motion.a
+            href="#"
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 1.05 }}
+            className="cursor-pointer"
+          >
+            <img
+              className="w-6 h-6"
+              alt="WhatsApp"
+              src="/assets/whatsApp.svg"
+            />
+          </motion.a>
+          <motion.a
+            href="#"
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 1.05 }}
+            className="cursor-pointer"
+          >
+            <img
+              className="w-6 h-6"
+              alt="Instagram"
+              src="/assets/instagram.svg"
+            />
+          </motion.a>
+          <motion.a
+            href="#"
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 1.05 }}
+            className="cursor-pointer"
+          >
+            <img
+              className="w-6 h-6"
+              alt="LinkedIn"
+              src="/assets/linkedIn.svg"
+            />
+          </motion.a>
+        </div>
+      </div>
     </div>
   );
 };

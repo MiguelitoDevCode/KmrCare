@@ -1,0 +1,178 @@
+/* eslint-disable no-unused-vars */
+import React from "react";
+import { motion } from "motion/react";
+import PropTypes from 'prop-types'; // Importer PropTypes
+
+// Helper component for list items with a dot
+const ListItem = ({ children }) => (
+  <li className="flex items-start mb-2">
+    <span className="flex-shrink-0 w-3 h-3 mt-1.5 bg-[#0f425d] rounded-full mr-3"></span>
+    <span className="text-sm md:text-base text-gray-700">{children}</span>
+  </li>
+);
+
+// Ajouter la validation des props pour ListItem
+ListItem.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export const GroupWrapper = () => {
+  return (
+    <div className="w-full py-12 md:py-20 lg:py-24 bg-sky-50/50">
+      {/* Header Section */}
+      <div className="text-center mb-10 md:mb-16 px-4">
+        <div className="font-caption font-bold text-[#0b9444] text-sm md:text-base tracking-wider uppercase mb-2">
+          DES SOINS DE CONFIANCE
+        </div>
+        <h2 className="font-display-2 font-semibold text-secondary text-2xl sm:text-3xl md:text-4xl leading-tight">
+          Nos services
+        </h2>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 md:gap-8 p-4 sm:p-6 md:p-8 bg-gray-100 rounded-lg shadow-lg">
+        {/* Left Column: Services List */}
+        <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        whileInView={{ y: 0, opacity:1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="lg:w-1/4 xl:w-1/5 w-full bg-white rounded-md shadow flex flex-col border border-gray-200">
+          {/* Service Item 1 */}
+          <div className="p-4 md:p-5 text-center bg-[#0b9444] rounded-t-md">
+            <img
+              className="w-8 h-8 mx-auto mb-2"
+              alt="Medical"
+              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/medical-1.svg"
+            />
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="font-body font-medium text-white text-sm md:text-base"
+            >
+              Consultation générale
+            </motion.div>
+          </div>
+          {/* Service Item 2 */}
+          <div className="p-4 md:p-5 text-center border-t border-gray-100">
+            <img
+              className="w-8 h-8 mx-auto mb-2"
+              alt="Cardiology"
+              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-12.svg" // Assuming this is cardiology icon
+            />
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="font-body font-medium text-gray-800 text-sm md:text-base"
+            >
+              Cardiologie
+            </motion.div>
+          </div>
+          {/* Service Item 3 */}
+          <div className="p-4 md:p-5 text-center bg-[#0b9444] border-t border-gray-100">
+            <img
+              className="w-8 h-8 mx-auto mb-2"
+              alt="Prenatal care"
+              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-36.svg" // Assuming prenatal icon
+            />
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="font-body font-medium text-white text-sm md:text-base"
+            >
+              Suivi prénatal
+            </motion.div>
+          </div>
+          {/* Service Item 4 */}
+          <div className="p-4 md:p-5 text-center border-t border-gray-100">
+            <img
+              className="w-8 h-10 mx-auto mb-2" // Adjusted height for this icon if needed
+              alt="Vaccination"
+              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-5.svg" // Assuming vaccination icon
+            />
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="font-body font-medium text-gray-800 text-sm md:text-base"
+            >
+              Vaccination
+            </motion.div>
+          </div>
+          {/* View All Button */}
+          <motion.div
+            whileHover={{ y: 3 }} // Subtle lift on hover
+            whileTap={{ scale: 0.98 }}
+            className="mt-auto bg-[#0f425d] text-white text-center py-3 px-4 rounded-b-md cursor-pointer font-button-text font-medium text-sm md:text-base"
+          >
+            Voir Tout
+          </motion.div>
+        </motion.div>
+
+        {/* Center Column: Text Content */}
+        <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        whileInView={{ y: 0, opacity:1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="lg:w-1/2 xl:flex-grow w-full p-4 md:p-6 bg-white rounded-md shadow">
+          <h3 className="font-title font-semibold text-xl md:text-2xl text-gray-800 mb-4 md:mb-6">
+            Le patient avant tout.
+          </h3>
+          
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 mb-6 md:mb-8">
+            <ListItem>Recherche Facile</ListItem>
+            <ListItem>Rappels Automatiques</ListItem>
+            <ListItem>Consultation</ListItem>
+            <ListItem>Gestion de Vos Rendez-vous</ListItem>
+            <ListItem>Réservation Instantanée</ListItem>
+            <ListItem>Accès 24/7</ListItem>
+          </ul>
+
+          <div className="space-y-4 text-sm md:text-base text-gray-600 leading-relaxed">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+              placerat scelerisque tortor ornare ornare. Quisque placerat
+              scelerisque tortor ornare ornare Convallis felis vitae tortor
+              augue. Velit nascetur proin massa in. Consequat faucibus porttitor
+              enim et.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+              placerat scelerisque. Convallis felis vitae tortor augue. Velit
+              nascetur proin massa in.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Right Column: Images (visible on md screens and up) */}
+        <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        whileInView={{ y: 0, opacity:1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="lg:w-1/4 xl:w-1/3 w-full hidden md:flex flex-col gap-6">
+          <div className="relative bg-gray-200 rounded-md shadow overflow-hidden">
+            <img
+              className="w-full h-48 sm:h-56 md:h-64 object-cover"
+              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/rectangle-13.png"
+              alt="Service Image 1"
+            />
+            <div className="absolute bottom-0 left-0 w-full h-2.5 flex">
+              <div className="w-1/3 h-full bg-[#0f425d]"></div>
+              <div className="w-1/3 h-full bg-[#0b9444]"></div>
+              <div className="w-1/3 h-full bg-[#bed2f7]"></div>
+            </div>
+          </div>
+          <div className="relative bg-gray-200 rounded-md shadow overflow-hidden">
+            <img
+              className="w-full h-48 sm:h-56 md:h-64 object-cover"
+              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/rectangle-14.png"
+              alt="Service Image 2"
+            />
+            <div className="absolute bottom-0 left-0 w-full h-2.5 flex">
+              <div className="w-1/3 h-full bg-[#0f425d]"></div>
+              <div className="w-1/3 h-full bg-[#0b9444]"></div>
+              <div className="w-1/3 h-full bg-[#bed2f7]"></div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
