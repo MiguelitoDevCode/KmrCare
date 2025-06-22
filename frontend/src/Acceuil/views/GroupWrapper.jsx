@@ -18,7 +18,7 @@ ListItem.propTypes = {
 
 export const GroupWrapper = () => {
   return (
-    <div className="w-full py-12 md:py-20 lg:py-24 bg-sky-50/50">
+    <div className="w-full py-12 md:py-20 lg:py-24">
       {/* Header Section */}
       <div className="text-center mb-10 md:mb-16 px-4">
         <div className="font-caption font-bold text-[#0b9444] text-sm md:text-base tracking-wider uppercase mb-2">
@@ -37,70 +37,73 @@ export const GroupWrapper = () => {
         whileInView={{ y: 0, opacity:1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true, margin: "-100px" }}
-        className="lg:w-1/4 xl:w-1/5 w-full bg-white rounded-md shadow flex flex-col border border-gray-200">
-          {/* Service Item 1 */}
-          <div className="p-4 md:p-5 text-center bg-[#0b9444] rounded-t-md">
-            <img
-              className="w-8 h-8 mx-auto mb-2"
-              alt="Medical"
-              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/medical-1.svg"
-            />
+        className="lg:w-1/4 xl:w-1/5 w-full bg-white rounded-md shadow flex flex-col border border-gray-200">          {/* Service Item 1 - Urgences */}
+          <div className="p-4 md:p-5 text-center bg-gradient-to-r from-red-500 to-red-600 rounded-t-md">
+            <div className="text-3xl mb-2">🚨</div>
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="font-body font-medium text-white text-sm md:text-base"
             >
-              Consultation générale
+              Urgences 24h/7j
             </motion.div>
           </div>
-          {/* Service Item 2 */}
-          <div className="p-4 md:p-5 text-center border-t border-gray-100">
-            <img
-              className="w-8 h-8 mx-auto mb-2"
-              alt="Cardiology"
-              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-12.svg" // Assuming this is cardiology icon
-            />
+          {/* Service Item 2 - Prénatal */}
+          <div className="p-4 md:p-5 text-center bg-gradient-to-r from-pink-100 to-pink-200 border-t border-gray-100">
+            <div className="flex items-center justify-center mb-2">
+              <span className="text-2xl">🤱</span>
+              <img
+                className="w-6 h-6 ml-1"
+                alt="Prénatal"
+                src="/assets/prenatal.svg"
+              />
+            </div>
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="font-body font-medium text-gray-800 text-sm md:text-base"
+              className="font-body font-medium text-pink-800 text-sm md:text-base"
             >
-              Cardiologie
+              Suivi Prénatal
             </motion.div>
           </div>
-          {/* Service Item 3 */}
-          <div className="p-4 md:p-5 text-center bg-[#0b9444] border-t border-gray-100">
-            <img
-              className="w-8 h-8 mx-auto mb-2"
-              alt="Prenatal care"
-              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-36.svg" // Assuming prenatal icon
-            />
+          {/* Service Item 3 - Consultation */}
+          <div className="p-4 md:p-5 text-center bg-gradient-to-r from-[#0b9444] to-[#0a7c3a] border-t border-gray-100">
+            <div className="flex items-center justify-center mb-2">
+              <span className="text-2xl">🩺</span>
+              <img
+                className="w-6 h-6 ml-1"
+                alt="Consultation"
+                src="/assets/consultation.svg"
+              />
+            </div>
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="font-body font-medium text-white text-sm md:text-base"
             >
-              Suivi prénatal
+              Consultation Générale
             </motion.div>
-          </div>
-          {/* Service Item 4 */}
-          <div className="p-4 md:p-5 text-center border-t border-gray-100">
-            <img
-              className="w-8 h-10 mx-auto mb-2" // Adjusted height for this icon if needed
-              alt="Vaccination"
-              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-5.svg" // Assuming vaccination icon
-            />
+          </div>          {/* Service Item 4 - Vaccination */}
+          <div className="p-4 md:p-5 text-center bg-gradient-to-r from-blue-100 to-blue-200 border-t border-gray-100">
+            <div className="flex items-center justify-center mb-2">
+              <span className="text-2xl">💉</span>
+              <img
+                className="w-6 h-8 ml-1"
+                alt="Vaccination"
+                src="/assets/vaccin.svg"
+              />
+            </div>
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="font-body font-medium text-gray-800 text-sm md:text-base"
+              className="font-body font-medium text-blue-800 text-sm md:text-base"
             >
               Vaccination
             </motion.div>
           </div>
           {/* View All Button */}
           <motion.div
-            whileHover={{ y: 3 }} // Subtle lift on hover
+            whileHover={{ y: -2, backgroundColor: "#0a2f3d" }}
             whileTap={{ scale: 0.98 }}
-            className="mt-auto bg-[#0f425d] text-white text-center py-3 px-4 rounded-b-md cursor-pointer font-button-text font-medium text-sm md:text-base"
+            className="mt-auto bg-[#0f425d] text-white text-center py-3 px-4 rounded-b-md cursor-pointer font-button-text font-medium text-sm md:text-base transition-all duration-300"
           >
-            Voir Tout
+            📋 Voir Tous les Services
           </motion.div>
         </motion.div>
 
@@ -146,11 +149,11 @@ export const GroupWrapper = () => {
         whileInView={{ y: 0, opacity:1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true, margin: "-100px" }}
-        className="lg:w-1/4 xl:w-1/3 w-full hidden md:flex flex-col gap-6">
-          <div className="relative bg-gray-200 rounded-md shadow overflow-hidden">
+        className="lg:w-1/4 xl:w-1/3 w-full md:flex flex-col gap-6">
+          <div className="relative bg-gray-200 rounded-md shadow">
             <img
               className="w-full h-48 sm:h-56 md:h-64 object-cover"
-              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/rectangle-13.png"
+              src="/assets/rectangle-1.png"
               alt="Service Image 1"
             />
             <div className="absolute bottom-0 left-0 w-full h-2.5 flex">
@@ -159,10 +162,10 @@ export const GroupWrapper = () => {
               <div className="w-1/3 h-full bg-[#bed2f7]"></div>
             </div>
           </div>
-          <div className="relative bg-gray-200 rounded-md shadow overflow-hidden">
+          <div className="relative bg-gray-200 rounded-md shadow">
             <img
               className="w-full h-48 sm:h-56 md:h-64 object-cover"
-              src="https://c.animaapp.com/mbfwxdap4GBqLX/img/rectangle-14.png"
+              src="/assets/rectangle-2.png"
               alt="Service Image 2"
             />
             <div className="absolute bottom-0 left-0 w-full h-2.5 flex">

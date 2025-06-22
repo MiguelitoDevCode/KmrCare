@@ -1,40 +1,51 @@
 import { useState } from "react";                                                                                                                                                                                                                                                                                                                              
-import { motion } from "motion/react";
+import { motion } from "motion/react";                                                                                                                                                                                                                                                                                                                              
+
+
 function Navigation() {
   return (
     <ul className="nav-ul">
       <li className="nav-li">
-        <a className="nav-link" href="#">
-          Acceuil
+        <a className="nav-link" href="#accueil">
+          🏠 Accueil
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#">
-          A Propos
+        <a className="nav-link" href="#apropos">
+          ℹ️ À Propos
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#">
-          Dispensaires
+        <a className="nav-link" href="#dispensaires">
+          🏥 Dispensaires
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#">
-          Contact
+        <a className="nav-link" href="#services">
+          💊 Services
+        </a>
+      </li>
+      <li className="nav-li">
+        <a className="nav-link" href="#contact">
+          📞 Contact
         </a>
       </li>
       <li>
         <motion.button
         whileTap={{ scale: 1.05 }}
-        className="btn" href="#">
-          Prendre un Rendez-vous
+        whileHover={{ scale: 1.02, y: -1 }}
+        className="btn bg-gradient-to-r from-[#0b9444] to-[#0a7c3a] hover:from-[#0a7c3a] hover:to-[#0b9444]" 
+        href="#">
+          📅 Prendre RDV
         </motion.button>
       </li>
       <li>
         <motion.button
         whileTap={{ scale: 1.05 }}
-        className="btn" href="#">
-          Se Connecter
+        whileHover={{ scale: 1.02, y: -1 }}
+        className="btn-secondary border-2 border-[#0f425d] text-[#0f425d] hover:bg-[#0f425d] hover:text-white bg-transparent"
+        href="#">
+          🔐 Se Connecter
         </motion.button>
       </li>
     </ul>

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { FooterWrapper } from "../../components/Accueil/FooterWrapper";
+import { FooterWrapper } from "../components/FooterWrapper";
 
 export const Footer = () => {
   return (

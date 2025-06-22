@@ -57,15 +57,15 @@
   --white: rgba(252, 254, 254, 1);
 }
 body {
-  /*background-color: black;*/
   color: white;
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
-/*.hover-animation {
-  @apply hover:-translate-y-1 duration-200;
-}*/
+/*Animation de Load*/
+.box {
+  box-shadow: 0 0 15px #0aade4;
+}
 
 /* Navigation */
 .nav-ul {
@@ -82,5 +82,94 @@ body {
 /* Button Components */
 .btn {
   @apply relative p-3 text-sm text-center font-bold rounded-sm bg-[#0b9444] hover:bg-[#ffffff] hover:text-secondary hover:border-2 transition-colors w-[12rem] cursor-pointer overflow-hidden;
+}
+
+.btn-secondary {
+  position: relative;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  width: 12rem;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Medical themed cards */
+.dispensaire-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  padding: 1.5rem;
+  border: 1px solid rgba(229, 231, 235, 1);
+}
+
+.dispensaire-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-0.5rem);
+}
+
+/* Service badges */
+.service-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: rgba(11, 148, 68, 0.1);
+  color: #0b9444;
+  border: 1px solid rgba(11, 148, 68, 0.2);
+}
+
+/* Medical icons */
+.medical-icon {
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+  background: linear-gradient(to bottom right, #0b9444, #0a7c3a);
+  border-radius: 9999px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Appointment slots */
+.appointment-time-slot {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.appointment-time-slot:hover {
+  border-color: #0b9444;
+  background-color: rgba(11, 148, 68, 0.05);
+}
+
+.appointment-time-slot.selected {
+  border-color: #0b9444;
+  background-color: #0b9444;
+  color: white;
+}
+
+/* Health gradients */
+.health-gradient {
+  background: linear-gradient(to right, #0b9444, #10425d, #0b9444);
+}
+
+.dispensaire-gradient {
+  background: linear-gradient(to bottom right, #dbeafe, #dcfce7);
 }
 

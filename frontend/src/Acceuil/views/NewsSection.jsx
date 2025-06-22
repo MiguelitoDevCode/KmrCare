@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { NewsSectionWrapper } from "../../components/Accueil/NewsSectionWrapper";
+import { NewsSectionWrapper } from "../components/NewsSectionWrapper";
 
 export const NewsSection = () => {
   return (

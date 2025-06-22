@@ -3,43 +3,60 @@ import React from "react";
 import PropTypes from 'prop-types'; // Importer PropTypes
 import { motion } from "motion/react";
 
-// Données pour les services pour faciliter le mappage
+// Données pour les services avec icônes médicales plus spécifiques
 const services = [
-  { name: "Neurology", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Bones", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Oncology", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Otorhinolaryngology", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Ophthalmology", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Cardiovascular", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Pulmonology", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Renal Medicine", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Urology", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Gastroenterology", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Dermatology", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
-  { name: "Gynaecology", icon: "https://c.animaapp.com/mbfwxdap4GBqLX/img/vector-2.svg" },
+  { name: "Consultation Générale", icon: "/assets/consultation.svg", emoji: "🩺" },
+  { name: "Suivi Prénatal", icon: "/assets/prenatal.svg", emoji: "🤱" },
+  { name: "Vaccination", icon: "/assets/vaccin.svg", emoji: "💉" },
+  { name: "Urgences Mineures", icon: "/assets/coeur-bip.svg", emoji: "🚨" },
+  { name: "Cardiologie", icon: "/assets/coeur.svg", emoji: "❤️" },
+  { name: "Pédiatrie", icon: "/assets/coeur-bip.svg", emoji: "👶" },
+  { name: "Dermatologie", icon: "/assets/coeur-bip.svg", emoji: "🧴" },
+  { name: "Gynécologie", icon: "/assets/coeur-bip.svg", emoji: "🌸" },
+  { name: "Analyses Médicales", icon: "/assets/coeur-bip.svg", emoji: "🧪" },
+  { name: "Ophtalmologie", icon: "/assets/coeur-bip.svg", emoji: "👁️" },
+  { name: "Dentisterie", icon: "/assets/coeur-bip.svg", emoji: "🦷" },
+  { name: "Physiothérapie", icon: "/assets/coeur-bip.svg", emoji: "🤸" },
 ];
 
-const ServiceCard = ({ name, icon, special }) => {
+const ServiceCard = ({ name, icon, emoji, special }) => {
   const bgColor = "bg-white";
   const textColor = "text-black";
   const shadow = "shadow-md";
 
-
   return (
     <motion.div
-    whileHover={{ color: "#ffffff",
-       backgroundColor: "#10425d"}}
-      className={`flex flex-col items-center justify-center p-4 md:p-6 rounded-lg ${bgColor} ${shadow} transition-all duration-300 hover:shadow-xl hover:-translate-y-1`}
+    whileHover={{ 
+      color: "#ffffff",
+      backgroundColor: "#10425d",
+      scale: 1.05,
+      y: -5
+    }}
+    transition={{ duration: 0.3 }}
+      className={`group flex flex-col items-center justify-center p-4 md:p-6 rounded-xl ${bgColor} ${shadow} transition-all duration-300 hover:shadow-2xl cursor-pointer border border-gray-100`}
     >
-      <img
-        className="w-12 h-12 md:w-14 md:h-14 mb-3 md:mb-4"
-        alt={name}
-        src={icon}
-      />
+      {/* Emoji + Icon */}
+      <div className="relative mb-3">
+        <span className="text-3xl md:text-4xl group-hover:scale-110 transition-transform duration-300">
+          {emoji}
+        </span>
+        <img
+          className="w-8 h-8 md:w-10 md:h-10 absolute -bottom-1 -right-1 opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+          alt={name}
+          src={icon}
+        />
+      </div>
+      
       <div
-        className={`font-sans font-medium text-sm md:text-base text-center ${textColor}`}
+        className={`font-sans font-medium text-sm md:text-base text-center ${textColor} group-hover:text-white transition-colors duration-300`}
       >
         {name}
+      </div>
+      
+      {/* Petit indicateur de disponibilité */}
+      <div className="mt-2 flex items-center space-x-1">
+        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+        <span className="text-xs text-gray-500 group-hover:text-gray-300">Disponible</span>
       </div>
     </motion.div>
   );
@@ -49,6 +66,7 @@ const ServiceCard = ({ name, icon, special }) => {
 ServiceCard.propTypes = {
   name: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
+  emoji: PropTypes.string.isRequired,
   special: PropTypes.bool,
 };
 
