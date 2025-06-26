@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 import React from "react";
 
 const dispensaires = [
@@ -159,9 +160,7 @@ const Vitrine = () => {
           {dispensaires.map((dispensaire) => (
             <DispensaireCard key={dispensaire.id} dispensaire={dispensaire} />
           ))}
-        </div>
-
-        {/* Bouton voir plus */}
+        </div>        {/* Bouton voir plus */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -169,13 +168,15 @@ const Vitrine = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-10"
         >
-          <motion.button
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-[#0f425d] to-[#0b9444] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            🗺️ Voir Tous les Dispensaires
-          </motion.button>
+          <Link to="/catalogue">
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-gradient-to-r from-[#0f425d] to-[#0b9444] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              🗺️ Voir Tous les Dispensaires
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </div>

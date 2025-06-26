@@ -1,5 +1,8 @@
 import { useGSAP } from "@gsap/react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Accueil from "./pages/Accueil";
+import Catalogue from "./pages/Catalogue";
+import EnSavoirPlus from "./Acceuil/views/EnSavoirPlus";
 import Load from "./pages/Loader";
 import gsap from "gsap";
 
@@ -32,7 +35,7 @@ const App = () => {
       scale: 0,
       duration: 1,
      });
-
+     
      // Animation de disparition du wrapper et restauration de la scrollbar verticale
      tl.to(".wrapper", {
       opacity: 0,
@@ -43,11 +46,17 @@ const App = () => {
       }
      });
   });
+  
   return (
-    <div>
-      <Load/>
-      <Accueil/>
-    </div>
+    <Router>
+      <div>
+        <Load/>        <Routes>
+          <Route path="/" element={<Accueil />} />
+          <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/en-savoir-plus" element={<EnSavoirPlus />} />
+        </Routes>
+      </div>
+    </Router>
   )
 };
 

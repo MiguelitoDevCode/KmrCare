@@ -829,7 +829,7 @@ const UniversalModal = ({ type, item, isOpen, onClose, onSave, medecins }) => {
               </div>
               
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Date d'embauche</label>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Date d`embauche</label>
                 <input
                   type="date"
                   value={formData.dateEmbauche}
@@ -860,7 +860,7 @@ const UniversalModal = ({ type, item, isOpen, onClose, onSave, medecins }) => {
                 <>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Heure d'ouverture</label>
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Heure d`ouverture</label>
                       <input
                         type="time"
                         value={formData.heureOuverture}
