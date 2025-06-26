@@ -12,7 +12,6 @@ const dispensaires = [
     services: ["Consultation", "Urgences", "Laboratoire"],
     horaires: "7h-18h",
     rating: 4.8,
-    disponible: true
   },
   {
     id: 2,
@@ -22,7 +21,6 @@ const dispensaires = [
     services: ["Prénatal", "Pédiatrie", "Vaccination"],
     horaires: "6h-20h",
     rating: 4.6,
-    disponible: true
   },
   {
     id: 3,
@@ -32,7 +30,6 @@ const dispensaires = [
     services: ["Consultation", "Cardiologie", "Dentaire"],
     horaires: "8h-17h",
     rating: 4.5,
-    disponible: false
   }
 ];
 
@@ -53,17 +50,6 @@ const DispensaireCard = ({ dispensaire }) => {
       viewport={{ once: true, margin: "-100px" }}
       className="relative w-full max-w-sm mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300"
     >
-      {/* Badge de statut */}
-      <div className="absolute top-4 right-4 z-20">
-        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-          dispensaire.disponible 
-            ? 'bg-green-100 text-green-800 border border-green-200' 
-            : 'bg-red-100 text-red-800 border border-red-200'
-        }`}>
-          {dispensaire.disponible ? '🟢 Ouvert' : '🔴 Fermé'}
-        </span>
-      </div>
-
       {/* Image du dispensaire */}
       <div className="relative w-full h-48 md:h-56">
         <div

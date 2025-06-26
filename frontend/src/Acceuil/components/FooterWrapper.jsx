@@ -15,7 +15,7 @@ export const FooterWrapper = ({
             🏥 KMRCARE
           </h2>
           <p className="font-body-2 text-sm mb-4">
-            Votre santé, simplifiée à Douala. Plus de 50 dispensaires partenaires pour vous servir 24h/7j.
+            Votre santé, simplifiée à Douala. Vous servir 24h/7j.
           </p>
           <div className="flex space-x-2 text-2xl">
             <span>📱</span>
@@ -67,16 +67,18 @@ export const FooterWrapper = ({
               autoComplete="email"
               required
             />
-            <button
+            <motion.button
+            whileHover={{ x: -6 }}
+            whileTap={{ scale: 1.5 }}
               type="button"
-              className="bg-[#0f425d] p-3 rounded-r-md hover:bg-[#0a2f3d] transition-all duration-200"
+              className="bg-white p-3 rounded-r-md transition-all duration-200"
             >
               <img
                 className="w-6 h-6"
                 alt="Submit"
                 src="/assets/send.svg"
               />
-            </button>
+            </motion.button>
           </div>
           
           {/* Numéros d'urgence */}
@@ -85,9 +87,10 @@ export const FooterWrapper = ({
               🚑 Urgences Médicales
             </h4>
             <p className="text-xs">
-              <strong>SAMU:</strong> 15 | <strong>Pompiers:</strong> 18
+              <strong>SAMU:</strong> 115 | <strong>Pompiers:</strong> 118
             </p>
-          </div>        </div>
+          </div>
+        </div>
       </div>
 
       {/* Séparateur et Copyright */}

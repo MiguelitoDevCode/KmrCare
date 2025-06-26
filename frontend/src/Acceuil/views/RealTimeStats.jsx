@@ -83,12 +83,6 @@ const RealTimeStats = () => {
     }
   ];
 
-  const recentActivity = [
-    { action: "RDV pris", location: "Dispensaire Akwa", time: "Il y a 2 min", icon: "📅" },
-    { action: "Nouveau patient", location: "Dispensaire Bonanjo", time: "Il y a 5 min", icon: "👤" },
-    { action: "Consultation terminée", location: "Dispensaire Makepe", time: "Il y a 8 min", icon: "✅" },
-    { action: "RDV confirmé", location: "Dispensaire Deido", time: "Il y a 12 min", icon: "✔️" }
-  ];
 
   return (
     <div className="w-full py-12 md:py-20 bg-gradient-to-br from-gray-50 to-blue-50/30">
@@ -126,52 +120,6 @@ const RealTimeStats = () => {
           ))}
         </div>
 
-        {/* Real-time Activity Feed */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100"
-        >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl md:text-2xl font-bold text-[#0f425d] flex items-center">
-              🔴 Activité en Direct
-            </h3>
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm text-gray-600 font-medium">En ligne</span>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            {recentActivity.map((activity, index) => (
-              <motion.div
-                key={index}
-                initial={{ x: -20, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-              >
-                <div className="text-2xl mr-4">{activity.icon}</div>
-                <div className="flex-1">
-                  <div className="font-semibold text-gray-800">{activity.action}</div>
-                  <div className="text-sm text-gray-600">{activity.location}</div>
-                </div>
-                <div className="text-xs text-gray-500">{activity.time}</div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* CTA Button */}
-          <motion.div 
-            className="text-center mt-8"
-            whileHover={{ scale: 1.02 }}
-          >            <button className="px-6 py-3 bg-gradient-to-r from-[#0b9444] to-[#0a7c3a] text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300">
-              🚀 Rejoindre l&apos;Activité
-            </button>
-          </motion.div>
-        </motion.div>
 
         {/* Horaires Info */}
         <motion.div
@@ -186,16 +134,16 @@ const RealTimeStats = () => {
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div className="flex items-center justify-center space-x-2">
-              <span className="text-green-500 font-bold">● OUVERT</span>
-              <span>Consultations: 6h - 20h</span>
+              <span className="text-primary font-bold">● OUVERT</span>
+              <span className="text-gray-500">Consultations: 6h - 20h</span>
             </div>
             <div className="flex items-center justify-center space-x-2">
               <span className="text-red-500 font-bold">● URGENCES</span>
-              <span>24h/7j - Tous dispensaires</span>
+              <span className="text-gray-500">24h/7j - Tous dispensaires</span>
             </div>
             <div className="flex items-center justify-center space-x-2">
-              <span className="text-blue-500 font-bold">● PLATEFORME</span>
-              <span>24h/7j - Réservation en ligne</span>
+              <span className="text-secondary font-bold">● PLATEFORME</span>
+              <span className="text-gray-500">24h/7j - Réservation en ligne</span>
             </div>
           </div>
         </motion.div>

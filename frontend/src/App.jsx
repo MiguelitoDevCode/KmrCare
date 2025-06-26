@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import Acceuil from "./pages/Accueil";
+import Accueil from "./pages/Accueil";
 import Load from "./pages/Loader";
 import gsap from "gsap";
 
@@ -46,7 +46,7 @@ const App = () => {
   return (
     <div>
       <Load/>
-      <Acceuil/>
+      <Accueil/>
     </div>
   )
 };

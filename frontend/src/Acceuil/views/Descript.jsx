@@ -25,7 +25,7 @@ const Descript = () => {
                             <div>
                                 <h4 className="font-bold text-[#0b9444] mb-1">Étape 1: Localiser</h4>
                                 <p className="text-gray-700">
-                                    Trouvez les dispensaires proches de chez vous avec notre carte interactive.
+                                    Trouvez les dispensaires proches de chez vous via notre Catalogue.
                                 </p>
                             </div>
                         </div>
@@ -48,12 +48,12 @@ const Descript = () => {
                     
                     <motion.div 
                         whileHover={{ scale: 1.02, x: 5 }}
-                        className="relative p-4 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg shadow border-l-4 border-purple-500 overflow-hidden group"
+                        className="relative p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg shadow border-l-4 border-primary overflow-hidden group"
                     >
                         <div className="flex items-center space-x-3">
                             <span className="text-2xl">✅</span>
                             <div>
-                                <h4 className="font-bold text-purple-600 mb-1">Étape 3: Gérer</h4>
+                                <h4 className="font-bold text-primary mb-1">Étape 3: Gérer</h4>
                                 <p className="text-gray-700">
                                     Modifiez, confirmez ou annulez votre RDV à tout moment.
                                 </p>
@@ -85,21 +85,6 @@ const Descript = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 className="lg:w-1/4 xl:w-1/3 w-full justify-center items-center hidden md:flex flex-col gap-8"
             >
-                <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="relative overflow-hidden text-center"
-                >
-                    <div className="medical-icon mb-2 mx-auto">
-                        <span className="text-2xl">📍</span>
-                    </div>
-                    <p className="text-[#0f425d] font-bold">Géolocalisation</p>
-                    <motion.img
-                        whileHover={{ scale: 0.8 }}
-                        className="w-20 h-20 mx-auto mt-2 opacity-60"
-                        src="/assets/local.png"
-                        alt="Localisation"
-                    />
-                </motion.div>
 
                 <motion.div 
                     whileHover={{ scale: 1.1, rotate: -5 }}
@@ -125,7 +110,12 @@ const Descript = () => {
                         <span className="text-2xl">⚡</span>
                     </div>
                     <p className="text-[#0f425d] font-bold">Instantané</p>
-                    <div className="text-4xl mt-2">🚀</div>
+                    <motion.img
+                        whileHover={{ scale: 0.7 }}
+                        className="w-20 h-20 mx-auto mt-2 opacity-60"
+                        src="/assets/instant.png"
+                        alt="Instantané"
+                    />
                 </motion.div>
 
                 <motion.div 

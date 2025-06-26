@@ -5,21 +5,21 @@ import { motion } from "motion/react";
 
 // Données pour les services avec icônes médicales plus spécifiques
 const services = [
-  { name: "Consultation Générale", icon: "/assets/consultation.svg", emoji: "🩺" },
-  { name: "Suivi Prénatal", icon: "/assets/prenatal.svg", emoji: "🤱" },
-  { name: "Vaccination", icon: "/assets/vaccin.svg", emoji: "💉" },
-  { name: "Urgences Mineures", icon: "/assets/coeur-bip.svg", emoji: "🚨" },
-  { name: "Cardiologie", icon: "/assets/coeur.svg", emoji: "❤️" },
-  { name: "Pédiatrie", icon: "/assets/coeur-bip.svg", emoji: "👶" },
-  { name: "Dermatologie", icon: "/assets/coeur-bip.svg", emoji: "🧴" },
-  { name: "Gynécologie", icon: "/assets/coeur-bip.svg", emoji: "🌸" },
-  { name: "Analyses Médicales", icon: "/assets/coeur-bip.svg", emoji: "🧪" },
-  { name: "Ophtalmologie", icon: "/assets/coeur-bip.svg", emoji: "👁️" },
-  { name: "Dentisterie", icon: "/assets/coeur-bip.svg", emoji: "🦷" },
-  { name: "Physiothérapie", icon: "/assets/coeur-bip.svg", emoji: "🤸" },
+  { name: "Consultation Générale", ico: "/assets/coeur-bip.svg" },
+  { name: "Suivi Prénatal", ico: "/assets/coeur-bip.svg" },
+  { name: "Vaccination", ico: "/assets/coeur-bip.svg" },
+  { name: "Urgences Mineures", ico: "/assets/coeur-bip.svg" },
+  { name: "Cardiologie", ico: "/assets/coeur.svg" },
+  { name: "Pédiatrie", ico: "/assets/coeur-bip.svg" },
+  { name: "Dermatologie", ico: "/assets/coeur-bip.svg" },
+  { name: "Gynécologie", ico: "/assets/coeur-bip.svg" },
+  { name: "Analyses Médicales", ico: "/assets/coeur-bip.svg" },
+  { name: "Ophtalmologie", ico: "/assets/coeur-bip.svg" },
+  { name: "Dentisterie", ico: "/assets/coeur-bip.svg" },
+  { name: "Physiothérapie", ico: "/assets/coeur-bip.svg" },
 ];
 
-const ServiceCard = ({ name, icon, emoji, special }) => {
+const ServiceCard = ({ name, ico }) => {
   const bgColor = "bg-white";
   const textColor = "text-black";
   const shadow = "shadow-md";
@@ -35,15 +35,12 @@ const ServiceCard = ({ name, icon, emoji, special }) => {
     transition={{ duration: 0.3 }}
       className={`group flex flex-col items-center justify-center p-4 md:p-6 rounded-xl ${bgColor} ${shadow} transition-all duration-300 hover:shadow-2xl cursor-pointer border border-gray-100`}
     >
-      {/* Emoji + Icon */}
+      {/* Icon */}
       <div className="relative mb-3">
-        <span className="text-3xl md:text-4xl group-hover:scale-110 transition-transform duration-300">
-          {emoji}
-        </span>
         <img
           className="w-8 h-8 md:w-10 md:h-10 absolute -bottom-1 -right-1 opacity-60 group-hover:opacity-100 transition-opacity duration-300"
           alt={name}
-          src={icon}
+          src={ico}
         />
       </div>
       
@@ -52,12 +49,6 @@ const ServiceCard = ({ name, icon, emoji, special }) => {
       >
         {name}
       </div>
-      
-      {/* Petit indicateur de disponibilité */}
-      <div className="mt-2 flex items-center space-x-1">
-        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-        <span className="text-xs text-gray-500 group-hover:text-gray-300">Disponible</span>
-      </div>
     </motion.div>
   );
 };
@@ -65,8 +56,7 @@ const ServiceCard = ({ name, icon, emoji, special }) => {
 // Ajouter la validation des props pour ServiceCard
 ServiceCard.propTypes = {
   name: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  emoji: PropTypes.string.isRequired,
+  ico: PropTypes.string.isRequired,
   special: PropTypes.bool,
 };
 
@@ -107,7 +97,7 @@ export const DivWrapper = () => {
             <ServiceCard
               key={service.name}
               name={service.name}
-              icon={service.icon}
+              ico={service.ico}
               special={service.special}
             />
           ))}

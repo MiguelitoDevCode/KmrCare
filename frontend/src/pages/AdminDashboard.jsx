@@ -12,7 +12,6 @@ const AdminDashboard = () => {
       name: 'Dr. Jean Kouam',
       email: 'jean.kouam@kmrcare.com',
       role: 'Médecin',
-      status: 'Actif',
       lastLogin: '2025-06-20',
       phone: '+237 657 755 890'
     },
@@ -21,7 +20,6 @@ const AdminDashboard = () => {
       name: 'Marie Nguema',
       email: 'marie.nguema@kmrcare.com',
       role: 'Infirmière',
-      status: 'Actif',
       lastLogin: '2025-06-21',
       phone: '+237 657 755 891'
     },
@@ -30,7 +28,6 @@ const AdminDashboard = () => {
       name: 'Paul Mballa',
       email: 'paul.mballa@kmrcare.com',
       role: 'Patient',
-      status: 'Inactif',
       lastLogin: '2025-06-15',
       phone: '+237 657 755 892'
     },
@@ -39,7 +36,6 @@ const AdminDashboard = () => {
       name: 'Dr. Claire Ateba',
       email: 'claire.ateba@kmrcare.com',
       role: 'Médecin',
-      status: 'Actif',
       lastLogin: '2025-06-22',
       phone: '+237 657 755 893'
     }
@@ -70,10 +66,6 @@ const AdminDashboard = () => {
     user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.role.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const getStatusColor = (status) => {
-    return status === 'Actif' ? 'text-[#37A936]' : 'text-red-500';
-  };
 
   const getRoleColor = (role) => {
     switch (role) {
@@ -117,12 +109,15 @@ const AdminDashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14 sm:h-16">
             <div className="flex items-center min-w-0 flex-1">
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#10425d] truncate" style={{
+              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold flex gap-3 text-[#10425d] truncate" style={{
                 fontFamily: 'var(--title-font-family)',
                 fontSize: 'clamp(18px, 4vw, var(--title-font-size))',
                 fontWeight: 'var(--title-font-weight)'
               }}>
-                <span className="hidden sm:inline">Dashboard Admin - </span>KmrCare
+                <img className="w-5 h-5" src="/assets/dashico.png" alt="dashico" />
+                <span className="hidden sm:inline">
+                  Dashboard Admin - 
+                </span>KmrCare
               </h1>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
@@ -217,7 +212,7 @@ const AdminDashboard = () => {
                     placeholder="Rechercher..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-[#37A936] focus:border-[#37A936] text-sm"
+                    className="flex-1 px-3 py-2 border border-gray-300 text-black rounded-md focus:ring-[#37A936] focus:border-[#37A936] text-sm"
                     style={{
                       fontFamily: 'var(--body-font-family)',
                       fontSize: 'var(--body-font-size)'
@@ -248,7 +243,6 @@ const AdminDashboard = () => {
                       { key: 'name', label: 'Nom', mobile: true },
                       { key: 'email', label: 'Email', mobile: false },
                       { key: 'role', label: 'Rôle', mobile: true },
-                      { key: 'status', label: 'Statut', mobile: false },
                       { key: 'lastLogin', label: 'Dernière Connexion', mobile: false },
                       { key: 'phone', label: 'Téléphone', mobile: false },
                       { key: 'actions', label: 'Actions', mobile: true }
@@ -302,11 +296,6 @@ const AdminDashboard = () => {
                           <span className="sm:hidden">
                             {user.role === 'Médecin' ? 'Dr' : user.role === 'Infirmière' ? 'Inf' : 'Pat'}
                           </span>
-                        </span>
-                      </td>
-                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap hidden md:table-cell">
-                        <span className={`text-xs sm:text-sm font-medium ${getStatusColor(user.status)}`}>
-                          {user.status}
                         </span>
                       </td>
                       <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500 hidden md:table-cell" style={{
@@ -474,7 +463,6 @@ const UserModal = ({ user, isOpen, onClose, onSave }) => {
     name: user?.name || '',
     email: user?.email || '',
     role: user?.role || 'Patient',
-    status: user?.status || 'Actif',
     phone: user?.phone || ''
   });
 
@@ -546,18 +534,6 @@ const UserModal = ({ user, isOpen, onClose, onSave }) => {
                 <option value="Infirmière">Infirmière</option>
               </select>
             </div>
-            
-            <div>
-              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Statut</label>
-              <select
-                value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-[#37A936] focus:border-[#37A936] text-sm"
-              >
-                <option value="Actif">Actif</option>
-                <option value="Inactif">Inactif</option>
-              </select>
-            </div>
           </div>
           
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 pt-4">
@@ -588,7 +564,6 @@ UserModal.propTypes = {
     name: PropTypes.string,
     email: PropTypes.string,
     role: PropTypes.string,
-    status: PropTypes.string,
     phone: PropTypes.string,
     lastLogin: PropTypes.string
   }),

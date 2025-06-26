@@ -15,7 +15,7 @@ function Load() {
             {crossPattern.map((isActive, index) => (
               <div 
                 key={index} 
-                className={`box w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 ${
+                className={`box w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 rounded-full ${
                   isActive ? 'bg-[#10425d]' : 'bg-transparent'
                 }`}
               />

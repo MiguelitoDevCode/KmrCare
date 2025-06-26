@@ -14,7 +14,6 @@ const DocDashboard = () => {
       email: 'a.bassong@dispensaire1.com',
       specialite: 'Médecine Générale',
       telephone: '+237 657 755 894',
-      status: 'Actif',
       dateEmbauche: '2024-01-15'
     },
     {
@@ -23,7 +22,6 @@ const DocDashboard = () => {
       email: 'p.mboma@dispensaire1.com',
       specialite: 'Pédiatrie',
       telephone: '+237 657 755 895',
-      status: 'Actif',
       dateEmbauche: '2024-03-10'
     },
     {
@@ -32,7 +30,6 @@ const DocDashboard = () => {
       email: 'm.ekotto@dispensaire1.com',
       specialite: 'Gynécologie',
       telephone: '+237 657 755 896',
-      status: 'En congé',
       dateEmbauche: '2023-11-20'
     }
   ]);
@@ -46,7 +43,6 @@ const DocDashboard = () => {
       heureFermeture: '17:00',
       pauseDebut: '12:00',
       pauseFin: '13:00',
-      actif: true
     },
     {
       id: 2,
@@ -55,7 +51,6 @@ const DocDashboard = () => {
       heureFermeture: '17:00',
       pauseDebut: '12:00',
       pauseFin: '13:00',
-      actif: true
     },
     {
       id: 3,
@@ -64,7 +59,6 @@ const DocDashboard = () => {
       heureFermeture: '17:00',
       pauseDebut: '12:00',
       pauseFin: '13:00',
-      actif: true
     },
     {
       id: 4,
@@ -73,7 +67,6 @@ const DocDashboard = () => {
       heureFermeture: '17:00',
       pauseDebut: '12:00',
       pauseFin: '13:00',
-      actif: true
     },
     {
       id: 5,
@@ -82,7 +75,6 @@ const DocDashboard = () => {
       heureFermeture: '17:00',
       pauseDebut: '12:00',
       pauseFin: '13:00',
-      actif: true
     },
     {
       id: 6,
@@ -91,7 +83,6 @@ const DocDashboard = () => {
       heureFermeture: '12:00',
       pauseDebut: '',
       pauseFin: '',
-      actif: true
     },
     {
       id: 7,
@@ -100,7 +91,6 @@ const DocDashboard = () => {
       heureFermeture: '',
       pauseDebut: '',
       pauseFin: '',
-      actif: false
     }
   ]);
 
@@ -114,7 +104,6 @@ const DocDashboard = () => {
       date: '2025-06-23',
       heure: '09:00',
       motif: 'Consultation générale',
-      statut: 'Confirmé',
       notes: ''
     },
     {
@@ -125,7 +114,6 @@ const DocDashboard = () => {
       date: '2025-06-23',
       heure: '10:30',
       motif: 'Suivi pédiatrique',
-      statut: 'En attente',
       notes: ''
     },
     {
@@ -136,7 +124,6 @@ const DocDashboard = () => {
       date: '2025-06-24',
       heure: '14:00',
       motif: 'Consultation gynécologique',
-      statut: 'Confirmé',
       notes: 'Première consultation'
     }
   ]);
@@ -205,18 +192,6 @@ const DocDashboard = () => {
     rdv.motif.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Utilitaires
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'Actif': return 'text-[#37A936] bg-green-100';
-      case 'En congé': return 'text-orange-600 bg-orange-100';
-      case 'Confirmé': return 'text-[#37A936] bg-green-100';
-      case 'En attente': return 'text-yellow-600 bg-yellow-100';
-      case 'Annulé': return 'text-red-600 bg-red-100';
-      default: return 'text-gray-600 bg-gray-100';
-    }
-  };
-
   // Statistiques
   const stats = [
     {
@@ -245,6 +220,18 @@ const DocDashboard = () => {
     }
   ];
 
+  // Utilitaires
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Actif': return 'text-[#37A936] bg-green-100';
+      case 'En congé': return 'text-orange-600 bg-orange-100';
+      case 'Confirmé': return 'text-[#37A936] bg-green-100';
+      case 'En attente': return 'text-yellow-600 bg-yellow-100';
+      case 'Annulé': return 'text-red-600 bg-red-100';
+      default: return 'text-gray-600 bg-gray-100';
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -252,11 +239,12 @@ const DocDashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14 sm:h-16">
             <div className="flex items-center min-w-0 flex-1">
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#10425d] truncate" style={{
+              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold flex gap-3 text-[#10425d] truncate" style={{
                 fontFamily: 'var(--title-font-family)',
                 fontSize: 'clamp(18px, 4vw, var(--title-font-size))',
                 fontWeight: 'var(--title-font-weight)'
               }}>
+                <img className="w-5 h-5" src="/assets/dashico.png" alt="dashico" />
                 <span className="hidden sm:inline">Dashboard Médecin Chef - </span>{dispensaireInfo.nom}
               </h1>
             </div>
@@ -358,7 +346,7 @@ const DocDashboard = () => {
                     placeholder="Rechercher un médecin..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-[#37A936] focus:border-[#37A936] text-sm"
+                    className="flex-1 px-3 py-2 border border-gray-300 text-black rounded-md focus:ring-[#37A936] focus:border-[#37A936] text-sm"
                   />
                   <button
                     onClick={handleAddMedecin}
@@ -380,7 +368,6 @@ const DocDashboard = () => {
                       { key: 'specialite', label: 'Spécialité', mobile: true },
                       { key: 'email', label: 'Email', mobile: false },
                       { key: 'telephone', label: 'Téléphone', mobile: false },
-                      { key: 'status', label: 'Status', mobile: true },
                       { key: 'actions', label: 'Actions', mobile: true }
                     ].map((header) => (
                       <th
@@ -421,11 +408,6 @@ const DocDashboard = () => {
                       <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500 hidden md:table-cell">
                         {medecin.telephone}
                       </td>
-                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(medecin.status)}`}>
-                          {medecin.status}
-                        </span>
-                      </td>
                       <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium">
                         <div className="flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2">
                           <button
@@ -460,7 +442,7 @@ const DocDashboard = () => {
                 Horaires de Service
               </h2>
               <p className="text-sm text-gray-600 mt-1">
-                Définissez les horaires d'ouverture du dispensaire pour les rendez-vous
+                Définissez les horaires d`ouverture du dispensaire pour les rendez-vous
               </p>
             </div>
 
@@ -472,7 +454,6 @@ const DocDashboard = () => {
                     <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ouverture</th>
                     <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fermeture</th>
                     <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Pause</th>
-                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
                     <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
@@ -493,13 +474,6 @@ const DocDashboard = () => {
                           ? `${horaire.pauseDebut} - ${horaire.pauseFin}`
                           : 'Aucune'
                         }
-                      </td>
-                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                          horaire.actif ? 'text-[#37A936] bg-green-100' : 'text-red-600 bg-red-100'
-                        }`}>
-                          {horaire.actif ? 'Ouvert' : 'Fermé'}
-                        </span>
                       </td>
                       <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button
@@ -532,9 +506,9 @@ const DocDashboard = () => {
                     placeholder="Rechercher un rendez-vous..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-[#37A936] focus:border-[#37A936] text-sm"
+                    className="flex-1 px-3 py-2 border border-gray-300 text-black rounded-md focus:ring-[#37A936] focus:border-[#37A936] text-sm"
                   />
-                  <select className="px-3 py-2 border border-gray-300 rounded-md focus:ring-[#37A936] focus:border-[#37A936] text-sm">
+                  <select className="px-3 py-2 border border-gray-300 text-gray-700 rounded-md focus:ring-[#37A936] focus:border-[#37A936] text-sm">
                     <option value="">Tous les statuts</option>
                     <option value="Confirmé">Confirmé</option>
                     <option value="En attente">En attente</option>
@@ -681,7 +655,7 @@ const DocDashboard = () => {
                   <input
                     type="text"
                     value={dispensaireInfo.nom}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
+                    className="w-full px-3 py-2 border text-secondary border-gray-300 rounded-md bg-gray-50"
                     readOnly
                   />
                 </div>
@@ -690,7 +664,7 @@ const DocDashboard = () => {
                   <input
                     type="text"
                     value={dispensaireInfo.telephone}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
+                    className="w-full px-3 py-2 border text-secondary border-gray-300 rounded-md bg-gray-50"
                     readOnly
                   />
                 </div>
@@ -699,7 +673,7 @@ const DocDashboard = () => {
                   <input
                     type="text"
                     value={dispensaireInfo.adresse}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
+                    className="w-full px-3 py-2 border text-secondary border-gray-300 rounded-md bg-gray-50"
                     readOnly
                   />
                 </div>
@@ -750,7 +724,6 @@ const UniversalModal = ({ type, item, isOpen, onClose, onSave, medecins }) => {
         email: item?.email || '',
         specialite: item?.specialite || 'Médecine Générale',
         telephone: item?.telephone || '',
-        status: item?.status || 'Actif',
         dateEmbauche: item?.dateEmbauche || new Date().toISOString().split('T')[0]
       };
     } else if (type === 'horaire') {
@@ -759,7 +732,6 @@ const UniversalModal = ({ type, item, isOpen, onClose, onSave, medecins }) => {
         heureFermeture: item?.heureFermeture || '',
         pauseDebut: item?.pauseDebut || '',
         pauseFin: item?.pauseFin || '',
-        actif: item?.actif || false
       };
     } else if (type === 'rendezVous') {
       return {
@@ -852,19 +824,6 @@ const UniversalModal = ({ type, item, isOpen, onClose, onSave, medecins }) => {
                     <option value="Gynécologie">Gynécologie</option>
                     <option value="Cardiologie">Cardiologie</option>
                     <option value="Dermatologie">Dermatologie</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Statut</label>
-                  <select
-                    value={formData.status}
-                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-[#37A936] focus:border-[#37A936] text-sm"
-                  >
-                    <option value="Actif">Actif</option>
-                    <option value="En congé">En congé</option>
-                    <option value="Inactif">Inactif</option>
                   </select>
                 </div>
               </div>

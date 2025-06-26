@@ -38,7 +38,7 @@ export const GroupWrapper = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true, margin: "-100px" }}
         className="lg:w-1/4 xl:w-1/5 w-full bg-white rounded-md shadow flex flex-col border border-gray-200">          {/* Service Item 1 - Urgences */}
-          <div className="p-4 md:p-5 text-center bg-gradient-to-r from-red-500 to-red-600 rounded-t-md">
+          <div className="p-4 md:p-5 text-center bg-gradient-to-r from-primary to-green-500 rounded-t-md">
             <div className="text-3xl mb-2">🚨</div>
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -48,7 +48,7 @@ export const GroupWrapper = () => {
             </motion.div>
           </div>
           {/* Service Item 2 - Prénatal */}
-          <div className="p-4 md:p-5 text-center bg-gradient-to-r from-pink-100 to-pink-200 border-t border-gray-100">
+          <div className="p-4 md:p-5 text-center bg-gradient-to-r from-blue-100 to-blue-200 border-t border-gray-100">
             <div className="flex items-center justify-center mb-2">
               <span className="text-2xl">🤱</span>
               <img
@@ -59,13 +59,13 @@ export const GroupWrapper = () => {
             </div>
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="font-body font-medium text-pink-800 text-sm md:text-base"
+              className="font-body font-medium text-blue-800 text-sm md:text-base"
             >
               Suivi Prénatal
             </motion.div>
           </div>
           {/* Service Item 3 - Consultation */}
-          <div className="p-4 md:p-5 text-center bg-gradient-to-r from-[#0b9444] to-[#0a7c3a] border-t border-gray-100">
+          <div className="p-4 md:p-5 text-center bg-gradient-to-r from-primary to-green-500 border-t border-gray-100">
             <div className="flex items-center justify-center mb-2">
               <span className="text-2xl">🩺</span>
               <img

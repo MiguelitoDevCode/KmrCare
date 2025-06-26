@@ -6,8 +6,6 @@ import { motion, AnimatePresence } from "motion/react";
 export const Apparence = ({
   property1,
   className,
-  physicianTrendsClassName,
-  physicianTrendsClassNameOverride,
 }) => {
   // Images for different variants
   const defaultImages = [
@@ -60,7 +58,7 @@ export const Apparence = ({
                   duration: 1.2,
                   ease: [0.25, 0.46, 0.45, 0.94]
                 }}
-                className={`absolute inset-0 ${property1 === "default" ? "h-[715px]" : "h-full md:h-[738px]"} bg-cover bg-center bg-no-repeat z-0`}
+                className={`absolute inset-0 ${property1 === "default" ? "h-[600px]" : "h-full md:h-[560px]"} bg-cover bg-center bg-no-repeat z-0`}
                 style={{
                   backgroundImage: `url(${currentImages[currentImageIndex]})`
                 }}
