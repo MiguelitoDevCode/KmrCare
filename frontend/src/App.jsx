@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Accueil from "./pages/Accueil";
 import Catalogue from "./pages/Catalogue";
 import EnSavoirPlus from "./Acceuil/views/EnSavoirPlus";
+import Authentification from "./pages/Authentification";
 import Load from "./pages/Loader";
 import gsap from "gsap";
 
@@ -54,6 +55,7 @@ const App = () => {
           <Route path="/" element={<Accueil />} />
           <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/en-savoir-plus" element={<EnSavoirPlus />} />
+          <Route path="/auth" element={<Authentification />} />
         </Routes>
       </div>
     </Router>

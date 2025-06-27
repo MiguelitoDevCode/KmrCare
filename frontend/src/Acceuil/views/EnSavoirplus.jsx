@@ -1,9 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 
 const EnSavoirPlus = () => {
+  // Remettre la scrollbar en haut lors du montage du composant
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50/50 to-green-50/50">
       {/* Navbar simple pour la navigation */}

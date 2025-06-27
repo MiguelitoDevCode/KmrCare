@@ -1,5 +1,6 @@
 import { useState } from "react";                                                                                                                                                                                                                                                                                                                              
-import { motion } from "motion/react";                                                                                                                                                                                                                                                                                                                              
+import { motion } from "motion/react";
+import { Link } from "react-router-dom";                                                                                                                                                                                                                                                                                                                              
 
 
 function Navigation() {
@@ -31,22 +32,26 @@ function Navigation() {
         </a>
       </li>
       <li>
-        <motion.button
-        whileTap={{ scale: 1.05 }}
-        whileHover={{ scale: 1.02, y: -1 }}
-        className="btn bg-gradient-to-r from-[#0b9444] to-[#0a7c3a] hover:from-[#0a7c3a] hover:to-[#0b9444]" 
-        href="#">
-          📅 Prendre RDV
-        </motion.button>
+        <Link to="/catalogue">
+          <motion.button
+          whileTap={{ scale: 1.05 }}
+          whileHover={{ scale: 1.02, y: -1 }}
+          className="btn bg-gradient-to-r from-[#0b9444] to-[#0a7c3a] hover:from-[#0a7c3a] hover:to-[#0b9444]"
+          >
+            📅 Prendre RDV
+          </motion.button>
+        </Link>
       </li>
       <li>
-        <motion.button
-        whileTap={{ scale: 1.05 }}
-        whileHover={{ scale: 1.02, y: -1 }}
-        className="btn-secondary border-2 border-[#0f425d] text-[#0f425d] hover:bg-[#0f425d] hover:text-white bg-transparent"
-        href="#">
-          🔐 Se Connecter
-        </motion.button>
+        <a href="/auth" target="_blank" rel="noopener noreferrer">
+          <motion.button
+          whileTap={{ scale: 1.05 }}
+          whileHover={{ scale: 1.02, y: -1 }}
+          className="btn-secondary border-2 border-[#0f425d] text-[#0f425d] hover:bg-[#0f425d] hover:text-white bg-transparent"
+          >
+            🔐 Se Connecter
+          </motion.button>
+        </a>
       </li>
     </ul>
   );

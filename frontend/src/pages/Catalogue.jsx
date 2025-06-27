@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 // Base de données étendue des dispensaires de Douala
 const dispensairesData = [
@@ -451,6 +451,11 @@ const Catalogue = () => {
   const [selectedDispensaire, setSelectedDispensaire] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Remettre la scrollbar en haut lors du montage du composant
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Filtrage des dispensaires
   const filteredDispensaires = useMemo(() => {
     return dispensairesData.filter(dispensaire => {
@@ -537,7 +542,7 @@ const Catalogue = () => {
                 placeholder="Rechercher un dispensaire ou un quartier..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-3 pl-12 pr-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#0b9444] focus:border-transparent outline-none"
+                className="w-full px-4 py-3 pl-12 pr-4 rounded-xl  text-secondary border-gray-300 focus:ring-2 focus:ring-[#0b9444] focus:border-transparent outline-none"
               />
               <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
                 🔍

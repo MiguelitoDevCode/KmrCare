@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from 'prop-types'; // Importer PropTypes
 import { motion } from "motion/react";
 
@@ -36,9 +36,9 @@ const ServiceCard = ({ name, ico }) => {
       className={`group flex flex-col items-center justify-center p-4 md:p-6 rounded-xl ${bgColor} ${shadow} transition-all duration-300 hover:shadow-2xl cursor-pointer border border-gray-100`}
     >
       {/* Icon */}
-      <div className="relative mb-3">
+      <div className="relative mb-3 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center">
         <img
-          className="w-8 h-8 md:w-10 md:h-10 absolute -bottom-1 -right-1 opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+          className="w-8 h-8 md:w-12 md:h-12 opacity-70 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110"
           alt={name}
           src={ico}
         />
@@ -65,17 +65,21 @@ ServiceCard.defaultProps = {
 };
 
 export const DivWrapper = () => {
+
   return (
-    <div className="w-full py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      {/* Header Section */}
-      <div className="text-center mb-10 md:mb-16 max-w-2xl mx-auto">
-        <p className="font-caption font-bold text-[#0b9444] text-sm md:text-base tracking-wider uppercase mb-2">
-          QUEL SERVICE MÉDICAL CHERCHEZ-VOUS ?
-        </p>
-        <h2 className="font-display-2 font-semibold text-[#0f425d] text-2xl sm:text-3xl md:text-4xl leading-tight">
-          Nos Consultations
-        </h2>
-      </div>
+    <div className="min-h-screen bg-gray-50">
+
+      {/* Contenu principal */}
+      <div className="w-full py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="text-center mb-10 md:mb-16 max-w-2xl mx-auto">
+          <p className="font-caption font-bold text-[#0b9444] text-sm md:text-base tracking-wider uppercase mb-2">
+            QUEL SERVICE MÉDICAL CHERCHEZ-VOUS ?
+          </p>
+          <h2 className="font-display-2 font-semibold text-[#0f425d] text-2xl sm:text-3xl md:text-4xl leading-tight">
+            Nos Consultations
+          </h2>
+        </div>
 
       {/* Services Grid */}
       {/* L'image group-190.png est omise car elle est difficile à rendre responsive avec une grille dynamique */}
@@ -103,6 +107,7 @@ export const DivWrapper = () => {
           ))}
         </div>
       </motion.div>
+      </div>
     </div>
   );
 };
