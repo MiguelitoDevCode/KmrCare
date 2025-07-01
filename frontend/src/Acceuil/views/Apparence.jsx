@@ -126,13 +126,15 @@ export const Apparence = ({
                     transition={{ duration: 0.6, delay: 1.2 }}
                     className="flex flex-col sm:flex-row gap-4 w-full mt-6"
                   >
-                    <motion.button
+                    <a href="#disp">
+                      <motion.button
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                       className="px-8 py-4 bg-[#0b9444] text-white font-semibold rounded-lg shadow-lg hover:bg-[#0a7c3a] transition-all duration-300 text-center"
                     >
                       🏥 Trouver un Dispensaire
                     </motion.button>
+                    </a>
                     <motion.button
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}

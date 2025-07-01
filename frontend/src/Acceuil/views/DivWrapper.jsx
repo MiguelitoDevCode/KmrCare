@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import PropTypes from 'prop-types'; // Importer PropTypes
 import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 
 // Données pour les services avec icônes médicales plus spécifiques
 const services = [
@@ -9,7 +10,7 @@ const services = [
   { name: "Suivi Prénatal", ico: "/assets/coeur-bip.svg" },
   { name: "Vaccination", ico: "/assets/coeur-bip.svg" },
   { name: "Urgences Mineures", ico: "/assets/coeur-bip.svg" },
-  { name: "Cardiologie", ico: "/assets/coeur.svg" },
+  { name: "Cardiologie", ico: "/assets/coeur-bip.svg" },
   { name: "Pédiatrie", ico: "/assets/coeur-bip.svg" },
   { name: "Dermatologie", ico: "/assets/coeur-bip.svg" },
   { name: "Gynécologie", ico: "/assets/coeur-bip.svg" },
@@ -65,9 +66,42 @@ ServiceCard.defaultProps = {
 };
 
 export const DivWrapper = () => {
-
+  // Remettre la scrollbar en haut lors du montage du composant
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50" id="services">
+      {/* Navbar simple pour la navigation */}
+      <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <Link to="/" className="flex items-center space-x-2">
+              <img
+                alt="Logo KmrCare"
+                src="/assets/logo.png"
+                className="h-8 sm:h-10 w-auto"
+              />
+              <span className="text-lg sm:text-xl font-bold text-[#0f425d] hidden sm:block">KmrCare</span>
+            </Link>
+            
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <Link
+                to="/"
+                className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-2 text-[#0f425d] hover:text-white hover:bg-[#0f425d] rounded-lg font-medium transition-all duration-200 text-sm sm:text-base"
+              >
+                <span>←</span>
+                <span className="hidden sm:inline">🏠 Retour à l&apos;accueil</span>
+                <span className="sm:hidden">🏠</span>
+              </Link>
+              <span className="text-[#0b9444] font-semibold text-sm sm:text-base">
+                <span className="hidden sm:inline">ℹ️ En Savoir Plus</span>
+                <span className="sm:hidden">ℹ️ Info</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </nav>
 
       {/* Contenu principal */}
       <div className="w-full py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">

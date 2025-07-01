@@ -1,7 +1,6 @@
 import Navbar from "../Acceuil/views/Navbar";
 import { Apparence } from "../Acceuil/views/Apparence";
 import { GroupWrapper } from "../Acceuil/views/GroupWrapper";
-import { DivWrapper } from "../Acceuil/views/DivWrapper";
 import { Footer } from "../Acceuil/views/Footer";
 import Grouper from "../Acceuil/views/Group";
 import Vitrine from "../Acceuil/views/Vitrine";
@@ -19,7 +18,6 @@ const Accueil = () => {
         <Vitrine/>
         <Descript/>
         <GroupWrapper/>
-        <DivWrapper/>
         <RealTimeStats/>
         <Testimonials/>
         <Footer/>   

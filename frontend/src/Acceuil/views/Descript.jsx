@@ -71,7 +71,7 @@ const Descript = () => {
                         <div className="flex items-center space-x-2">
                             <span className="text-lg">💡</span>
                             <p className="text-sm text-yellow-800 font-medium">
-                                <strong>Astuce:</strong> Recevez des rappels automatiques par SMS et email !
+                                <strong>Astuce:</strong> Recevez des rappels automatiques par email !
                             </p>
                         </div>
                     </motion.div>                </div>

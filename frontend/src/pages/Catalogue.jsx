@@ -269,17 +269,19 @@ const DispensaireCard = ({ dispensaire, onOpen }) => {
 
         {/* Boutons d'action */}
         <div className="flex space-x-2">
+          <Link to="/reservations" className="flex-1">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full bg-[#0b9444] text-white py-2 px-4 rounded-lg font-semibold text-sm hover:bg-[#0a7c3a] transition-colors duration-200"
+            >
+              📅 Prendre RDV
+            </motion.button>
+          </Link>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={onOpen}
-            className="flex-1 bg-[#0b9444] text-white py-2 px-4 rounded-lg font-semibold text-sm hover:bg-[#0a7c3a] transition-colors duration-200"
-          >
-            📅 Prendre RDV
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className="px-4 py-2 border border-[#0f425d] text-[#0f425d] rounded-lg font-semibold text-sm hover:bg-[#0f425d] hover:text-white transition-colors duration-200"
           >
             ℹ️
@@ -288,7 +290,7 @@ const DispensaireCard = ({ dispensaire, onOpen }) => {
       </div>
 
       {/* Barre de couleur en bas */}
-      <div className="h-3 flex">
+      <div className="mt-auto h-3 flex">
         <div className="flex-1 bg-[#0f425d]" />
         <div className="flex-1 bg-[#0b9444]" />
         <div className="flex-1 bg-[#a5c2f7]" />

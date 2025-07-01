@@ -259,7 +259,7 @@ const EnSavoirPlus = () => {
                 </div>
                 <h3 className="text-lg font-semibold text-[#0f425d] mb-3">1. Recherchez</h3>
                 <p className="text-gray-600 text-sm">
-                  Trouvez le dispensaire le plus proche de chez vous grâce à notre géolocalisation.
+                  Trouvez le dispensaire le plus proche de chez vous grâce à notre catalogue.
                 </p>
               </motion.div>
 
@@ -289,7 +289,7 @@ const EnSavoirPlus = () => {
                 </div>
                 <h3 className="text-lg font-semibold text-[#0f425d] mb-3">3. Confirmez</h3>
                 <p className="text-gray-600 text-sm">
-                  Recevez une confirmation instantanée par SMS avec tous les détails de votre RDV.
+                  Recevez une confirmation instantanée par Mail avec tous les détails de votre RDV.
                 </p>
               </motion.div>
 

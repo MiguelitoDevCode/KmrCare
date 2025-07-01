@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 
 const Authentification = () => {
   // États pour la gestion des pages et formulaires
-  const [currentPage, setCurrentPage] = useState('landing');
-  const [pageHistory, setPageHistory] = useState(['landing']);
+  const [currentPage, setCurrentPage] = useState('login');
+  const [pageHistory, setPageHistory] = useState(['login']);
   const [showPassword, setShowPassword] = useState({});
   const [formData, setFormData] = useState({});
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -15,17 +15,17 @@ const Authentification = () => {
   // Données du carrousel médical
   const carouselData = [
     {
-      img: '/assets/logo.png',
+      img: '/ico.png',
       text: 'KmrCare relie les patients aux meilleurs professionnels de santé du Cameroun, facilitant l\'accès aux soins où que vous soyez.',
       bgColor: '#0f425d'
     },
     {
-      img: '/assets/doctor_consulting.png',
+      img: '/assets/coeur.svg',
       text: 'Que ce soit pour une urgence ou un suivi régulier, trouvez rapidement un rendez-vous avec le dispensaire adapté à vos besoins.',
       bgColor: '#0b9444'
     },
     {
-      img: '/assets/prenatal.svg',
+      img: '/assets/logo.png',
       text: 'Optimisez la gestion de vos rendez-vous et améliorez l\'expérience de vos patients grâce à notre plateforme intuitive et sécurisée.',
       bgColor: '#a5c2f7',
       textColor: '#0f425d'
@@ -51,7 +51,8 @@ const Authentification = () => {
       }
     }
   };
-
+  
+  //Retour page precedente
   const goBack = () => {
     if (pageHistory.length > 1) {
       const newHistory = [...pageHistory];
@@ -70,7 +71,7 @@ const Authentification = () => {
     }));
   };
 
-  // Gestion des formulaires
+  // Gestion simple des formulaires (frontend uniquement)
   const handleInputChange = (field, value) => {
     setFormData(prev => ({
       ...prev,
@@ -79,6 +80,7 @@ const Authentification = () => {
   };
 
   const handleSubmit = (formType) => {
+    // Navigation simple sans validation backend
     switch(formType) {
       case 'login':
         navigateTo('landing');
@@ -115,7 +117,7 @@ const Authentification = () => {
         <input
           type={showPassword[id] ? "text" : "password"}
           id={id}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+          className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
           placeholder={placeholder}
           required={required}
           onChange={(e) => handleInputChange(id, e.target.value)}
@@ -159,66 +161,60 @@ const Authentification = () => {
 
   // Panneau droit avec carrousel
   const RightPanel = () => (
-    <div 
-      className="hidden lg:flex lg:flex-1 flex-col justify-center items-center p-8 text-center"
+    <motion.div 
+      className="hidden lg:flex lg:flex-1 flex-col justify-center items-center p-8 text-center relative overflow-hidden"
       style={{ backgroundColor: carouselData[carouselIndex].bgColor }}
+      animate={{ backgroundColor: carouselData[carouselIndex].bgColor }}
+      transition={{ duration: 1.5, ease: "easeInOut" }}
     >
-      <div 
-        className="transition-colors duration-1500 ease-in-out absolute inset-0"
-        style={{ backgroundColor: carouselData[carouselIndex].bgColor }}
-      />
       <div className="relative z-10 w-full max-w-md h-80 mb-8">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={carouselIndex}
-            src={carouselData[carouselIndex].img}
-            alt="Illustration médicale"
-            className="w-full h-full object-contain"
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ 
-              duration: 1.5,
-              ease: "easeInOut",
-              opacity: { duration: 1.0 }
-            }}
-          />
-        </AnimatePresence>
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={carouselIndex}
+              src={carouselData[carouselIndex].img}
+              alt="Illustration médicale"
+              className="w-full h-full object-contain"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ 
+                duration: 1.5,
+                ease: "easeInOut",
+                opacity: { duration: 1.0 }
+              }}
+            />
+          </AnimatePresence>
       </div>
-      <motion.p
-        key={`text-${carouselIndex}`}
-        className="relative z-10 text-lg leading-relaxed max-w-sm"
-        style={{ color: carouselData[carouselIndex].textColor || '#ffffff' }}
-        initial={{ opacity: 0, y: 5 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          duration: 1.2, 
-          delay: 0.5,
-          ease: "easeOut"
-        }}
-      >
-        {carouselData[carouselIndex].text}
-      </motion.p>
-    </div>
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={`text-${carouselIndex}`}
+          className="relative z-10 text-lg leading-relaxed max-w-sm"
+          style={{ color: carouselData[carouselIndex].textColor || '#ffffff' }}
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -5 }}
+          transition={{ 
+            duration: 1.2, 
+            delay: 0.3,
+            ease: "easeOut"
+          }}
+        >
+          {carouselData[carouselIndex].text}
+        </motion.p>
+      </AnimatePresence>
+    </motion.div>
   );
 
   // Page d'accueil / Landing
   const LandingPage = () => (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex flex-col justify-center items-center p-4 relative">
+    <div className="min-h-screen bg-gray-300 flex flex-col justify-center items-center p-4 relative">
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop')` }}
+        style={{ backgroundImage: `url('/assets/login.jpeg')` }}
       />
-      <div className="relative z-10 text-center max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 1.2,
-            ease: "easeOut",
-            delay: 0.1
-          }}
-        >
+      <div
+      className="relative z-10 text-center max-w-4xl mx-auto">
+        <div>
           <Link to="/" className="inline-block mb-8">
             <img src="/assets/logo.png" alt="KmrCare Logo" className="h-20 w-auto mx-auto" />
           </Link>
@@ -226,16 +222,13 @@ const Authentification = () => {
             BIENVENUE SUR KmrCare<br />
             <span className="text-[#0b9444]">LA PLUS GRANDE COMMUNAUTÉ DE SOINS AU CAMEROUN</span>
           </h1>
-        </motion.div>
+        </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 1.2, 
-            delay: 0.4,
-            ease: "easeOut"
-          }}
+        initial={{ y: -5, opacity: 0}}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
           className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto"
         >
           <div className="bg-white/90 backdrop-blur rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-[1.01]">
@@ -284,10 +277,7 @@ const Authentification = () => {
       
       {/* Panel gauche - Formulaire */}
       <div className="flex-1 flex justify-center items-center p-4 lg:p-8 overflow-y-auto bg-white relative z-10">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+        <div
           className="w-full max-w-md"
         >
           <div className="text-center mb-8">
@@ -305,7 +295,7 @@ const Authentification = () => {
               <input
                 type="email"
                 id="login-email"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                className="w-full px-4 py-3 text-secondary border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                 placeholder="Votre adresse e-mail"
                 required
               />
@@ -316,6 +306,7 @@ const Authentification = () => {
               label="Mot de passe"
               placeholder="••••••••"
               required
+              className="text-secondary"
             />
 
             <div className="text-right">
@@ -340,7 +331,7 @@ const Authentification = () => {
               <button
                 type="button"
                 onClick={() => navigateTo('landing')}
-                className="text-[#0b9444] hover:text-[#0a7c3a] font-medium transition-colors"
+                className="text-[#0b9444] hover:text-[#0a7c3a] font-medium transition-colors cursor-pointer"
               >
                 Inscrivez-vous
               </button>
@@ -350,7 +341,7 @@ const Authentification = () => {
           <p className="text-center text-gray-500 text-sm mt-8">
             © KmrCare@2025. Tous droits réservés
           </p>
-        </motion.div>
+        </div>
       </div>
 
       {/* Panel droit - Carrousel */}
@@ -363,10 +354,7 @@ const Authentification = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex justify-center items-center p-4 relative">
       <BackButton />
       
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+      <div
         className="w-full max-w-md bg-white rounded-xl shadow-lg p-8"
       >
         <div className="text-center mb-8">
@@ -383,7 +371,7 @@ const Authentification = () => {
           <input
             type="email"
             placeholder="Votre adresse e-mail"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+            className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
             required
           />
           
@@ -398,7 +386,7 @@ const Authentification = () => {
         <p className="text-center text-gray-500 text-sm mt-8">
           © KmrCare@2025. Tous droits réservés
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 
@@ -424,10 +412,7 @@ const Authentification = () => {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex justify-center items-center p-4 relative">
         <BackButton />
         
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+        <div
           className="w-full max-w-md bg-white rounded-xl shadow-lg p-8"
         >
           <div className="text-center mb-8">
@@ -449,7 +434,7 @@ const Authentification = () => {
                   type="text"
                   value={code}
                   onChange={(e) => handleCodeChange(index, e.target.value)}
-                  className="w-12 h-14 text-2xl text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                  className="w-12 h-14 text-secondary text-2xl text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                   maxLength="1"
                   required
                 />
@@ -476,7 +461,7 @@ const Authentification = () => {
           <p className="text-center text-gray-500 text-sm mt-8">
             © KmrCare@2025. Tous droits réservés
           </p>
-        </motion.div>
+        </div>
       </div>
     );
   };
@@ -486,10 +471,7 @@ const Authentification = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex justify-center items-center p-4 relative">
       <BackButton />
       
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+      <div
         className="w-full max-w-md bg-white rounded-xl shadow-lg p-8"
       >
         <div className="text-center mb-8">
@@ -508,6 +490,7 @@ const Authentification = () => {
             label="Nouveau mot de passe"
             placeholder="Nouveau mot de passe"
             required
+            className="text-secondary"
           />
 
           <PasswordInput
@@ -515,6 +498,7 @@ const Authentification = () => {
             label="Confirmer votre mot de passe"
             placeholder="Confirmer votre mot de passe"
             required
+            className="text-secondary"
           />
           
           <button
@@ -528,7 +512,7 @@ const Authentification = () => {
         <p className="text-center text-gray-500 text-sm mt-8">
           © KmrCare@2025. Tous droits réservés
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 
@@ -539,10 +523,7 @@ const Authentification = () => {
       
       {/* Panel gauche - Formulaire */}
       <div className="flex-1 flex justify-center items-start p-4 lg:p-8 overflow-y-auto bg-white relative z-10">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+        <div
           className="w-full max-w-2xl pt-8"
         >
           <div className="text-center mb-8">
@@ -568,7 +549,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Noms*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 text-secondary border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -576,7 +557,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Prénoms*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 text-secondary border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -584,7 +565,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">E-mail*</label>
                   <input
                     type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -592,7 +573,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Numéro de téléphone*</label>
                   <input
                     type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -604,6 +585,7 @@ const Authentification = () => {
                   label="Créer un mot de passe*"
                   placeholder="Créer un mot de passe"
                   required
+                  className="text-secondary"
                 />
               </div>
             </div>
@@ -670,7 +652,7 @@ const Authentification = () => {
               </button>
             </p>
           </form>
-        </motion.div>
+        </div>
       </div>
 
       {/* Panel droit - Carrousel */}
@@ -685,10 +667,7 @@ const Authentification = () => {
       
       {/* Panel gauche - Formulaire */}
       <div className="flex-1 flex justify-center items-start p-4 lg:p-8 overflow-y-auto bg-white relative z-10">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+        <div
           className="w-full max-w-2xl pt-8"
         >
           <div className="text-center mb-8">
@@ -714,7 +693,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Noms*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 text-secondary border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -722,7 +701,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Prénoms*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -730,7 +709,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">E-mail*</label>
                   <input
                     type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -738,7 +717,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Numéro de téléphone*</label>
                   <input
                     type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -750,12 +729,14 @@ const Authentification = () => {
                   label="Créer un mot de passe*"
                   placeholder="Créer un mot de passe"
                   required
+                  className="text-secondary"
                 />
                 <PasswordInput
                   id="resp-password-confirm"
                   label="Confirmer votre mot de passe*"
                   placeholder="Confirmer votre mot de passe"
                   required
+                  className="text-secondary"
                 />
               </div>
 
@@ -764,7 +745,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Civilité du Responsable*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -772,7 +753,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Fonction/Poste*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -793,7 +774,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Nom Officiel du Dispensaire*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -801,7 +782,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Type de dispensaire*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -809,7 +790,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Quartier*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -817,7 +798,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Adresse Complète*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -825,7 +806,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Téléphone du Dispensaire*</label>
                   <input
                     type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -833,7 +814,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Email du Dispensaire*</label>
                   <input
                     type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -849,7 +830,7 @@ const Authentification = () => {
                   <label className="block mb-2 text-sm font-medium text-[#0f425d]">Horaires d&apos;Ouverture*</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
+                    className="w-full px-4 py-3 border text-secondary border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                     required
                   />
                 </div>
@@ -929,7 +910,7 @@ const Authentification = () => {
               </button>
             </p>
           </form>
-        </motion.div>
+        </div>
       </div>
 
       {/* Panel droit - Carrousel */}
@@ -945,10 +926,7 @@ const Authentification = () => {
         style={{ backgroundImage: `url('https://images.unsplash.com/photo-1551192422-6ea7bd54a7a8?q=80&w=2070&auto=format&fit=crop')` }}
       />
       
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+      <div
         className="relative z-10 w-full max-w-2xl bg-white/95 backdrop-blur rounded-xl shadow-xl p-8 text-center"
       >
         <Link to="/">
@@ -976,7 +954,7 @@ const Authentification = () => {
         >
           Cliquer ici pour accéder à la page d&apos;accueil
         </button>
-      </motion.div>
+      </div>
     </div>
   );
 
@@ -1007,19 +985,10 @@ const Authentification = () => {
   return (
     <div className="font-poppins">
       <AnimatePresence mode="wait">
-        <motion.div
-          key={currentPage}
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -5 }}
-          transition={{ 
-            duration: 0.8, 
-            ease: "easeInOut",
-            opacity: { duration: 0.6 }
-          }}
+        <div
         >
           {renderCurrentPage()}
-        </motion.div>
+        </div>
       </AnimatePresence>
     </div>
   );

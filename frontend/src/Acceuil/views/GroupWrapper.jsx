@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import PropTypes from 'prop-types'; // Importer PropTypes
+import { Link } from "react-router-dom";
 
 // Helper component for list items with a dot
 const ListItem = ({ children }) => (
@@ -98,13 +99,17 @@ export const GroupWrapper = () => {
             </motion.div>
           </div>
           {/* View All Button */}
-          <motion.div
+          <Link
+          className="mt-auto"
+          to="/services">
+             <motion.div
             whileHover={{ y: -2, backgroundColor: "#0a2f3d" }}
             whileTap={{ scale: 0.98 }}
-            className="mt-auto bg-[#0f425d] text-white text-center py-3 px-4 rounded-b-md cursor-pointer font-button-text font-medium text-sm md:text-base transition-all duration-300"
-          >
-            📋 Voir Tous les Services
-          </motion.div>
+            className="bg-[#0f425d] text-white text-center py-3 px-4 rounded-b-md cursor-pointer font-button-text font-medium text-sm md:text-base transition-all duration-300"
+            >
+              📋 Voir Tous les Services
+            </motion.div>
+          </Link>
         </motion.div>
 
         {/* Center Column: Text Content */}
@@ -129,16 +134,15 @@ export const GroupWrapper = () => {
 
           <div className="space-y-4 text-sm md:text-base text-gray-600 leading-relaxed">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              placerat scelerisque tortor ornare ornare. Quisque placerat
-              scelerisque tortor ornare ornare Convallis felis vitae tortor
-              augue. Velit nascetur proin massa in. Consequat faucibus porttitor
-              enim et.
+              Notre plateforme de télémédecine révolutionne l&apos;accès aux soins de santé en offrant 
+              une gamme complète de services médicaux accessibles 24h/24 et 7j/7. Des urgences 
+              médicales aux consultations de routine, nous mettons la technologie au service de 
+              votre bien-être avec des professionnels qualifiés.
             </p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              placerat scelerisque. Convallis felis vitae tortor augue. Velit
-              nascetur proin massa in.
+              Grâce à notre système de réservation et nos rappels automatiques, 
+              prenez en main votre santé en toute simplicité. Une expérience personnalisée 
+              qui place le patient au cœur de nos préoccupations.
             </p>
           </div>
         </motion.div>

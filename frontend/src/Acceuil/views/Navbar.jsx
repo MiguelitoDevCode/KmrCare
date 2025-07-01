@@ -32,7 +32,7 @@ function Navigation() {
         </a>
       </li>
       <li>
-        <Link to="/catalogue">
+        <Link to="/reservations">
           <motion.button
           whileTap={{ scale: 1.05 }}
           whileHover={{ scale: 1.02, y: -1 }}

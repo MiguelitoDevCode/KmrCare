@@ -133,7 +133,7 @@ const DispensaireCard = ({ dispensaire }) => {
 
 const Vitrine = () => {
   return (
-    <div className="w-full py-12 md:py-20 bg-gradient-to-br from-blue-50/50 to-green-50/50">
+    <div className="w-full py-12 md:py-20 bg-gradient-to-br from-blue-50/50 to-green-50/50" id="disp">
       {/* Header Section */}
       <div className="text-center mb-10 md:mb-16 max-w-3xl mx-auto px-4">
         <motion.div
