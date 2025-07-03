@@ -6,6 +6,7 @@ import EnSavoirPlus from "./Acceuil/views/EnSavoirPlus";
 import Authentification from "./pages/Authentification";
 import Reservations from "./pages/Reservations";
 import Load from "./pages/Loader";
+import Admin from "./pages/Admin";
 import gsap from "gsap";
 import { DivWrapper } from "./Acceuil/views/DivWrapper";
 
@@ -64,6 +65,7 @@ const AppContent = () => {
         <Route path="/en-savoir-plus" element={<EnSavoirPlus />} />
         <Route path="/reservations" element={<Reservations />} />
         <Route path="/auth" element={<Authentification />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/services" element={<DivWrapper/>} />
       </Routes>
     </div>

@@ -66,9 +66,63 @@ frontend/
 - **Utilisation** : **UNIQUEMENT sur la page d'accueil** (refactorisé dans App.jsx)
 - **Animation** : GSAP avec effets de déformation et rotation
 
-### 6. **AdminDashboard.jsx** & **DocDashboard.jsx**
-- **Description** : Tableaux de bord pour administrateurs et médecins
-- **État** : En développement
+### 6. **Admin/AdminDashboard.jsx** ⭐ **[NOUVEAU - INTERFACE COMPLÈTE]**
+- **Description** : Interface d'administration complète avec navigation par onglets
+- **Fonctionnalités** :
+  - **Sidebar responsive** avec menu de navigation
+  - **Topbar** avec notifications et bouton de déconnexion
+  - **Tableau de bord** avec statistiques et graphiques
+  - **Gestion des utilisateurs** (UserManagement)
+  - **Gestion des rendez-vous** (AppointmentManagement)
+  - **Gestion des dispensaires** (DispensariesManagement)
+  - **Section rapports** (en développement)
+- **Architecture** :
+  - Composants modulaires pour chaque section
+  - Données fictives pour démonstration
+  - Design responsive avec breakpoints
+  - Animations avec framer-motion
+
+### 7. **Admin/UserManagement.jsx** ⭐ **[NOUVEAU]**
+- **Description** : Gestion complète des utilisateurs
+- **Fonctionnalités** :
+  - **Affichage en tableau** avec pagination
+  - **Recherche et filtrage** par nom, email, rôle
+  - **Statistiques** par rôle et statut
+  - **Actions CRUD** (Créer, Lire, Modifier, Supprimer)
+  - **Modales** pour ajout/modification
+  - **Design responsive** avec adaptations mobile
+- **Données** : Utilisateurs fictifs (médecins, infirmières, patients)
+
+### 8. **Admin/AppointmentManagement.jsx** ⭐ **[NOUVEAU]**
+- **Description** : Gestion des rendez-vous médicaux
+- **Fonctionnalités** :
+  - **Affichage en tableau** avec tri et filtrage
+  - **Catégories** : En attente, Acceptés, Rejetés
+  - **Recherche** par patient, médecin, service
+  - **Calendrier intégré** pour visualisation
+  - **Gestion des statuts** avec mise à jour en temps réel
+  - **Notifications** pour les nouveaux rendez-vous
+- **Données** : Rendez-vous fictifs avec toutes les informations
+
+### 9. **Admin/DispensariesManagement.jsx** ⭐ **[NOUVEAU]**
+- **Description** : Gestion des dispensaires du réseau
+- **Fonctionnalités** :
+  - **Affichage en tableau** avec géolocalisation
+  - **Statuts** : Actif, Maintenance, Inactif
+  - **Informations détaillées** : Capacité, services, responsables
+  - **Indicateurs de performance** : Taux d'occupation, files d'attente
+  - **Carte interactive** pour visualisation géographique
+  - **Gestion des services** par dispensaire
+- **Données** : Dispensaires fictifs avec métadonnées complètes
+
+### 10. **DocDashboard.jsx**
+- **Description** : Interface pour les médecins
+- **Fonctionnalités** :
+  - Planning personnel
+  - Gestion des consultations
+  - Historique des patients
+  - Statistiques personnelles
+- **État** : En développement, interface existante à moderniser
 
 ## Composants d'Accueil (`src/Acceuil/`)
 
@@ -98,6 +152,61 @@ frontend/
 ## Système de Routage (`App.jsx`) ⭐ **[REFACTORISÉ]**
 
 ### Routes Principales
+```jsx
+<Routes>
+  <Route path="/" element={<Accueil />} />
+  <Route path="/catalogue" element={<Catalogue />} />
+  <Route path="/en-savoir-plus" element={<EnSavoirPlus />} />
+  <Route path="/reservations" element={<Reservations />} />
+  <Route path="/auth" element={<Authentification />} />
+  <Route path="/admin" element={<Admin />} />        // ⭐ NOUVEAU
+  <Route path="/services" element={<DivWrapper/>} />
+</Routes>
+```
+
+### Gestion des Animations
+- **Animation de chargement** : Uniquement sur la page d'accueil (`/`)
+- **Contrôle GSAP** : Masquage/restauration de la scrollbar verticale
+- **Optimisation** : Pas d'animations inutiles sur les autres pages
+
+## Interface d'Administration ⭐ **[NOUVEAU SYSTÈME COMPLET]**
+
+### Architecture Modulaire
+```
+Admin/
+├── AdminDashboard.jsx         # Interface principale avec sidebar
+├── UserManagement.jsx         # Gestion des utilisateurs
+├── AppointmentManagement.jsx  # Gestion des rendez-vous
+└── DispensariesManagement.jsx # Gestion des dispensaires
+```
+
+### Fonctionnalités Clés
+1. **Navigation par onglets** : Tableau de bord, Utilisateurs, Rendez-vous, Dispensaires, Rapports
+2. **Sidebar responsive** : Se cache automatiquement sur mobile
+3. **Topbar** : Notifications, date, bouton de déconnexion
+4. **Données fictives** : Prêt pour intégration backend
+5. **Animations** : Transitions fluides avec framer-motion
+6. **Responsive design** : Adaptations pour tous les écrans
+
+### Composants Partagés
+- **Modales** : Pour ajout/modification d'éléments
+- **Tableaux paginés** : Avec recherche et filtrage
+- **Statistiques** : Cartes avec icônes et graphiques
+- **Calendriers** : Intégration pour sélection de dates
+
+## Palette de Couleurs ⭐ **[THÈME KMRCARE]**
+
+### Couleurs Principales
+- **Primary** : `#37A936` (Vert KmrCare)
+- **Secondary** : `#10425d` (Bleu foncé)
+- **Accent** : `#bfd2f8` (Bleu clair)
+- **Background** : `#f9fafb` (Gris très clair)
+
+### Utilisation dans l'Admin
+- **Sidebar active** : Fond primary, texte blanc
+- **Boutons d'action** : Primary avec effet hover
+- **Statuts** : Vert (actif), Jaune (attente), Rouge (inactif)
+- **Cartes statistiques** : Fond blanc, bordures subtiles
 ```jsx
 <Routes>
   <Route path="/" element={<Accueil />} />           // Page d'accueil + Load
