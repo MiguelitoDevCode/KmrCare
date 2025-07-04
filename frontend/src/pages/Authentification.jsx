@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Link } from "react-router-dom";
@@ -175,13 +174,13 @@ const Authentification = () => {
         <form onSubmit={(e) => { e.preventDefault(); handleSubmit('login'); }} className="space-y-6">
           <div>
             <label htmlFor="login-email" className="block mb-2 text-sm font-medium text-[#0f425d]">
-              E-mail
+              Nom d`utilisateur
             </label>
             <input
-              type="email"
-              id="login-email"
+              type="text"
+              id="login-name"
               className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
-              placeholder="Votre adresse e-mail"
+              placeholder="Votre nom d'utilisateur"
               required
             />
           </div>

@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 
 const Grouper = () => {
   return (
-    <div className="w-full py-12 md:py-20 lg:py-24 bg-sky-50/50">
+    <div className="w-full py-12 md:py-20 lg:py-24 h-120 bg-gray-50/50">
       <motion.div
       initial={{ x: 100, opacity: 0 }}
       whileInView={{ x: 0, opacity: 1 }}

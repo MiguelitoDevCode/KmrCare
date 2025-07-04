@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/no-unescaped-entities */
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 const DispensariesManagement = () => {
@@ -537,7 +539,7 @@ const DispensariesManagement = () => {
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-semibold mb-4">Ajouter un dispensaire</h2>
             <p className="text-gray-600 mb-4">
-              Fonctionnalité en cours de développement. L'intégration avec le backend permettra d'ajouter de nouveaux dispensaires.
+              Fonctionnalité en cours de développement. L`intégration avec le backend permettra d'ajouter de nouveaux dispensaires.
             </p>
             <button
               onClick={() => setShowAddModal(false)}
@@ -554,7 +556,7 @@ const DispensariesManagement = () => {
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-semibold mb-4">Modifier le dispensaire</h2>
             <p className="text-gray-600 mb-4">
-              Modification de "{selectedDispensary.name}". L'intégration avec le backend permettra de modifier les informations du dispensaire.
+              Modification de "{selectedDispensary.name}". L`intégration avec le backend permettra de modifier les informations du dispensaire.
             </p>
             <button
               onClick={() => setShowEditModal(false)}

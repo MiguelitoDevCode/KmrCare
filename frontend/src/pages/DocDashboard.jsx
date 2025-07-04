@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import PropTypes from 'prop-types';
 
-const DocDashboard = () => {
+const Medecins = () => {
   const [activeTab, setActiveTab] = useState('medecins');
   
   // État pour les médecins du dispensaire
@@ -1033,4 +1033,4 @@ UniversalModal.propTypes = {
   medecins: PropTypes.array
 };
 
-export default DocDashboard;
+export default Medecins;

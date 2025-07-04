@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { motion } from "motion/react";
+import PropTypes from "prop-types";
 
 const AppointmentManagement = () => {
   const [activeCategory, setActiveCategory] = useState("pending");
@@ -208,6 +209,21 @@ const AppointmentManagement = () => {
       )}
     </motion.div>
   );
+
+  // Validation des props pour AppointmentCard
+  AppointmentCard.propTypes = {
+    appointment: PropTypes.shape({
+      patientName: PropTypes.string.isRequired,
+      patientPhone: PropTypes.string.isRequired,
+      priority: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+      dispensaryName: PropTypes.string.isRequired,
+      service: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+      notes: PropTypes.string,
+    }).isRequired,
+  };
 
   return (
     <div className="space-y-6">

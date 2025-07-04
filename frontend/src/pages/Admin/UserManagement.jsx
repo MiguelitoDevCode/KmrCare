@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { motion } from "motion/react";
+import PropTypes from "prop-types";
 
 const UserManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -119,7 +120,7 @@ const UserManagement = () => {
           <div>
             <h3 className="font-semibold text-gray-900">{user.name}</h3>
             <p className="text-sm text-gray-500">{user.email}</p>
-            <p className="text-sm text-gray-500">{user.phone}</p>
+            <p className="text-xs text-gray-400">{user.phone}</p>
           </div>
         </div>
         <div className="flex flex-col items-end space-y-2">
@@ -153,6 +154,19 @@ const UserManagement = () => {
       </div>
     </motion.div>
   );
+
+  // Validation des props pour UserCard
+  UserCard.propTypes = {
+    user: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+      joinDate: PropTypes.string.isRequired,
+      lastLogin: PropTypes.string.isRequired,
+    }).isRequired,
+  };
 
   return (
     <div className="space-y-6">

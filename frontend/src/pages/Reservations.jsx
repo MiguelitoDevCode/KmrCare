@@ -137,7 +137,7 @@ const Reservations = () => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6"
+      className="space-y-6 bg-sky-50/50"
     >
       <div>
         <h3 className="text-xl font-semibold text-[#0f425d] mb-4">
@@ -196,7 +196,7 @@ const Reservations = () => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6"
+      className="space-y-6 bg-sky-50/50"
     >
       <div>
         <h3 className="text-xl font-semibold text-[#0f425d] mb-4">
@@ -247,7 +247,7 @@ const Reservations = () => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6"
+      className="space-y-6 bg-sky-50/50"
     >
       <h3 className="text-xl font-semibold text-[#0f425d] mb-4">
         5. Vos informations personnelles
@@ -310,7 +310,12 @@ const Reservations = () => {
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors text-secondary"
           placeholder="Votre âge"
         />
+      </div>
 
+      <div>
+        <label className="block text-sm font-medium text-[#0f425d] mb-2">
+          Motif
+        </label>
         <textarea
           rows={4}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#159eec] focus:border-[#159eec] transition-colors text-secondary"
@@ -329,7 +334,7 @@ const Reservations = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="text-center space-y-6"
+        className="text-center space-y-6 bg-sky-50/50"
       >
         <div className="w-20 h-20 bg-[#0b9444] rounded-full flex items-center justify-center mx-auto">
           <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

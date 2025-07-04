@@ -36,10 +36,10 @@ export const Apparence = ({
   return (
     <div className={`w-full min-h-[500px] md:min-h-[600px] lg:min-h-[560px] ${className}`}>
       <div
-        className={`${property1 === "variant-2" ? "top-1" : ""} ${property1 === "variant-2" ? "min-h-[500px] md:min-h-[600px] lg:min-h-[560px]" : "min-h-[550px] md:min-h-[650px] lg:min-h-[724px]"} ${property1 === "variant-2" ? "relative" : ""}`}
+        className={`${property1 === "variant-2" ? "top-1" : ""} ${property1 === "variant-2" ? "min-h-[500px] md:min-h-[600px] lg:min-h-[560px]" : "min-h-[550px] md:min-h-[650px] lg:min-h-[560px]"} ${property1 === "variant-2" ? "relative" : ""}`}
       >
         <div
-          className={`w-full relative ${property1 === "variant-2" ? "min-h-[500px] md:min-h-[600px] lg:min-h-[560px]" : "min-h-[550px] md:min-h-[650px] lg:min-h-[724px]"}`}
+          className={`w-full relative ${property1 === "variant-2" ? "min-h-[500px] md:min-h-[600px] lg:min-h-[560px]" : "min-h-[550px] md:min-h-[650px] lg:min-h-[560px]"}`}
         >
           {/* Background color layer */}
           <div
@@ -135,13 +135,6 @@ export const Apparence = ({
                       🏥 Trouver un Dispensaire
                     </motion.button>
                     </a>
-                    <motion.button
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-8 py-4 bg-white text-[#0f425d] font-semibold rounded-lg shadow-lg border-2 border-[#0f425d] hover:bg-[#0f425d] hover:text-white transition-all duration-300 text-center"
-                    >
-                      📅 Prendre RDV Maintenant
-                    </motion.button>
                   </motion.div>
 
                   {/* Stats rapides */}

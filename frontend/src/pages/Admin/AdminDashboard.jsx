@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import UserManagement from './UserManagement';
 import AppointmentManagement from './AppointmentManagement';
 import DispensariesManagement from './DispensariesManagement';
@@ -8,11 +11,11 @@ import DispensariesManagement from './DispensariesManagement';
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [notifications, setNotifications] = useState(3);
+  const notifications = 3;
   const navigate = useNavigate();
 
   // Données fictives pour le dashboard
-  const [dashboardStats, setDashboardStats] = useState({
+  const dashboardStats = {
     totalUsers: 1247,
     totalAppointments: 856,
     totalDispensaries: 12,
@@ -21,7 +24,7 @@ const Admin = () => {
     completedAppointments: 743,
     newUsersToday: 23,
     appointmentsToday: 67
-  });
+  };
 
   const menuItems = [
     { id: 'dashboard', label: 'Tableau de bord', icon: '📊' },
@@ -197,7 +200,7 @@ const Dashboard = ({ stats }) => {
     <div className="p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Tableau de bord</h1>
-        <p className="text-gray-600">Vue d'ensemble de la plateforme KmrCare</p>
+        <p className="text-gray-600">Vue d`ensemble de la plateforme KmrCare</p>
       </div>
 
       {/* Statistiques principales */}
@@ -214,7 +217,7 @@ const Dashboard = ({ stats }) => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Utilisateurs</p>
               <p className="text-2xl font-bold text-gray-900">{stats.totalUsers.toLocaleString()}</p>
-              <p className="text-xs text-green-600">+{stats.newUsersToday} aujourd'hui</p>
+              <p className="text-xs text-green-600">+{stats.newUsersToday} aujourd`hui</p>
             </div>
           </div>
         </motion.div>
@@ -232,7 +235,7 @@ const Dashboard = ({ stats }) => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Rendez-vous</p>
               <p className="text-2xl font-bold text-gray-900">{stats.totalAppointments.toLocaleString()}</p>
-              <p className="text-xs text-blue-600">{stats.appointmentsToday} aujourd'hui</p>
+              <p className="text-xs text-blue-600">{stats.appointmentsToday} aujourd`hui</p>
             </div>
           </div>
         </motion.div>
@@ -381,7 +384,7 @@ const Reports = () => {
           Cette section permettra de générer et consulter différents types de rapports :
         </p>
         <ul className="text-left text-gray-600 space-y-2 max-w-md mx-auto">
-          <li>• Rapports d'activité mensuelle</li>
+          <li>• Rapports d`activité mensuelle</li>
           <li>• Statistiques des dispensaires</li>
           <li>• Rapports financiers</li>
           <li>• Analyse des tendances</li>
