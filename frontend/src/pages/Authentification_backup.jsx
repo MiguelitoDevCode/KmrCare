@@ -27,6 +27,47 @@ const Authentification = () => {
       navigate('/admin'); // ou page appropriée selon le rôle
     }
   }, [isAuthenticated, navigate]);
+   
+
+  //Gestion des Input de mot de passe
+  const PasswordInput = () => {
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+    };
+
+    return (
+      <div style={{ position: 'relative' }}>
+        <input
+          type={showPassword ? 'text' : 'password'}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Entrez votre mot de passe"
+          style={{ paddingRight: '40px' }}
+          className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
+        />
+        <button
+        type="button"
+        onClick={togglePasswordVisibility}
+        style={{
+            position: 'absolute',
+            right: '10px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            fontSize: '1.2rem',
+            color: '#666',
+          }}
+        >
+          {showPassword ? <EyeOff /> : <Eye />}
+        </button>
+      </div>
+    );
+  };
 
   // Données du carrousel médical
   const carouselData = [
@@ -226,6 +267,54 @@ const Authentification = () => {
           break;
         }
           
+        case 'forgot-email': {
+          // Demande de réinitialisation de mot de passe
+          if (!formData.email) {
+            notify.error('Veuillez saisir votre email');
+            return;
+          }
+          
+          // TODO: Intégrer avec l'API de réinitialisation
+          try {
+            // await authAPI.requestPasswordReset({ email: formData.email });
+            navigateTo('forgot-password-code');
+            notify.success('Un email de réinitialisation a été envoyé à votre adresse');
+          } catch (error) {
+            notify.error('Erreur lors de l\'envoi de l\'email de réinitialisation');
+          }
+          break;
+        }
+          
+        case 'forgot-code': {
+          // Vérification du code de réinitialisation
+          if (!formData.resetCode) {
+            notify.error('Veuillez saisir le code de vérification');
+            return;
+          }
+          
+          // TODO: Vérifier le code avec l'API
+          navigateTo('forgot-password-reset');
+          break;
+        }
+          
+        case 'forgot-reset': {
+          // Réinitialisation finale du mot de passe
+          if (!formData.newPassword || !formData.confirmNewPassword) {
+            notify.error('Veuillez remplir tous les champs');
+            return;
+          }
+          
+          if (formData.newPassword !== formData.confirmNewPassword) {
+            notify.error('Les mots de passe ne correspondent pas');
+            return;
+          }
+          
+          // TODO: Réinitialisation finale avec l'API
+          navigateTo('login');
+          notify.success('Mot de passe réinitialisé avec succès ! Vous pouvez maintenant vous connecter.');
+          break;
+        }
+          
         default:
           notify.error('Action non reconnue');
           break;
@@ -260,7 +349,8 @@ const Authentification = () => {
         className="absolute inset-0 bg-cover bg-center opacity-20"
         style={{ backgroundImage: `url('/assets/login.jpeg')` }}
       />
-      <div className="relative z-10 text-center max-w-4xl mx-auto">
+      <div
+      className="relative z-10 text-center max-w-4xl mx-auto">
         <div>
           <Link to="/" className="inline-block mb-8">
             <img src="/assets/logo.png" alt="KmrCare Logo" className="h-20 w-auto mx-auto" />
@@ -272,10 +362,10 @@ const Authentification = () => {
         </div>
 
         <motion.div
-          initial={{ y: -5, opacity: 0}}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.3 }}
+        initial={{ y: -5, opacity: 0}}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.3 }}
           className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto"
         >
           <div className="bg-white/90 backdrop-blur rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-[1.01]">
@@ -338,6 +428,8 @@ const Authentification = () => {
             <input
               type="email"
               id="login-email"
+              value={formData.email || ''}
+              onChange={(e) => updateFormData('email', e.target.value)}
               className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
               placeholder="Votre adresse email"
               required
@@ -353,6 +445,8 @@ const Authentification = () => {
               <input
                 type={formData.showPassword ? 'text' : 'password'}
                 id="login-password"
+                value={formData.password || ''}
+                onChange={(e) => updateFormData('password', e.target.value)}
                 placeholder="Entrez votre mot de passe"
                 style={{ paddingRight: '40px' }}
                 className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
@@ -450,6 +544,165 @@ const Authentification = () => {
     </div>
   );
 
+  // Page mot de passe oublié - Email
+  const ForgotPasswordEmailPage = () => (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex justify-center items-center p-4 relative">
+      <BackButton />
+      
+      <div
+        className="w-full max-w-md bg-white rounded-xl shadow-lg p-8"
+      >
+        <div className="text-center mb-8">
+          <Link to="/">
+            <img src="/assets/logo.png" alt="KmrCare Logo" className="h-16 w-auto mx-auto mb-6" />
+          </Link>
+          <h2 className="text-2xl font-bold text-[#0f425d] mb-4">Réinitialiser votre mot de passe</h2>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            Veuillez entrer votre adresse e-mail afin que nous vous envoyons un code pour créer un nouveau mot de passe.
+          </p>
+        </div>
+
+        <form onSubmit={(e) => { e.preventDefault(); handleSubmit('forgot-email'); }} className="space-y-6">
+          <input
+            type="email"
+            placeholder="Votre adresse e-mail"
+            className="w-full px-4 py-3 border text-[#0f425d] rounded-lg focus:border-[#4356614d] transition-colors"
+            required
+          />
+          
+          <button
+            type="submit"
+            className="w-full py-3 bg-[#0b9444] text-white font-semibold rounded-lg hover:bg-[#0a7c3a] transition-all duration-300 hover:scale-[1.01]"
+          >
+            Envoyer
+          </button>
+        </form>
+
+        <p className="text-center text-gray-500 text-sm mt-8">
+          © KmrCare@2025. Tous droits réservés
+        </p>
+      </div>
+    </div>
+  );
+
+  // Page mot de passe oublié - Code
+  const ForgotPasswordCodePage = () => {
+    const [codes, setCodes] = useState(['', '', '', '']);
+
+    const handleCodeChange = (index, value) => {
+      if (value.length <= 1) {
+        const newCodes = [...codes];
+        newCodes[index] = value;
+        setCodes(newCodes);
+        
+        // Auto-focus next input
+        if (value && index < 3) {
+          const nextInput = document.getElementById(`code-${index + 1}`);
+          if (nextInput) nextInput.focus();
+        }
+      }
+    };
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex justify-center items-center p-4 relative">
+        <BackButton />
+        
+        <div
+          className="w-full max-w-md bg-white rounded-xl shadow-lg p-8"
+        >
+          <div className="text-center mb-8">
+            <Link to="/">
+              <img src="/assets/logo.png" alt="KmrCare Logo" className="h-16 w-auto mx-auto mb-6" />
+            </Link>
+            <h2 className="text-2xl font-bold text-[#0f425d] mb-4">Réinitialiser votre mot de passe</h2>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Veuillez entrer le code secret envoyé à votre adresse mail xxxx**@gmail.com
+            </p>
+          </div>
+
+          <form onSubmit={(e) => { e.preventDefault(); handleSubmit('forgot-code'); }} className="space-y-6">
+            <div className="flex justify-center space-x-4 mb-6">
+              {codes.map((code, index) => (
+                <input
+                  key={index}
+                  id={`code-${index}`}
+                  type="text"
+                  className="w-12 h-14 text-[#0f425d] text-2xl text-center border  rounded-lg focus:border-[#4356614d] transition-colors"
+                  maxLength="1"
+                  required
+                />
+              ))}
+            </div>
+
+            <div className="text-center">
+              <button
+                type="button"
+                className="text-[#0b9444] hover:text-[#0a7c3a] font-medium text-sm transition-colors"
+              >
+                Renvoyer le code
+              </button>
+            </div>
+            
+            <button
+              type="submit"
+              className="w-full py-3 bg-[#0b9444] text-white font-semibold rounded-lg hover:bg-[#0a7c3a] transition-all duration-300 hover:scale-[1.01]"
+            >
+              Envoyer
+            </button>
+          </form>
+
+          <p className="text-center text-gray-500 text-sm mt-8">
+            © KmrCare@2025. Tous droits réservés
+          </p>
+        </div>
+      </div>
+    );
+  };
+
+  // Page mot de passe oublié - Reset
+  const ForgotPasswordResetPage = () => (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex justify-center items-center p-4 relative">
+      <BackButton />
+      
+      <div
+        className="w-full max-w-md bg-white rounded-xl shadow-lg p-8"
+      >
+        <div className="text-center mb-8">
+          <Link to="/">
+            <img src="/assets/logo.png" alt="KmrCare Logo" className="h-16 w-auto mx-auto mb-6" />
+          </Link>
+          <h2 className="text-2xl font-bold text-[#0f425d] mb-4">Réinitialiser votre mot de passe</h2>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            Nous sommes prêts à enregistrer votre nouveau mot de passe.
+          </p>
+        </div>
+
+        <form onSubmit={(e) => { e.preventDefault(); handleSubmit('forgot-reset'); }} className="space-y-6">
+          <div>
+            <label className="block mb-2 text-sm font-medium text-[#0f425d]">Nouveau mot de passe</label>
+            <PasswordInput/>
+          </div>
+
+          <div>
+            <label className="block mb-2 text-sm font-medium text-[#0f425d]">Confirmer votre mot de passe</label>
+            <PasswordInput/>
+          </div>
+          
+          <button
+            type="submit"
+            className="w-full py-3 bg-[#0b9444] text-white font-semibold rounded-lg hover:bg-[#0a7c3a] transition-all duration-300 hover:scale-[1.01]"
+          >
+            Confirmer
+          </button>
+        </form>
+
+        <p className="text-center text-gray-500 text-sm mt-8">
+          © KmrCare@2025. Tous droits réservés
+        </p>
+      </div>
+    </div>
+  );
+
   // Page d'inscription patient
   const RegisterPatientPage = () => (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex justify-center items-center p-4 relative">
@@ -463,7 +716,7 @@ const Authentification = () => {
           <h1 className="text-3xl font-bold text-[#0f425d]">Votre profil en trois étapes</h1>
         </div>
 
-        <form onSubmit={(e) => { e.preventDefault(); }} className="space-y-8">
+        <form onSubmit={(e) => { e.preventDefault(); handleSubmit('register-patient'); }} className="space-y-8">
           {/* Étape 1 - Identification */}
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -479,6 +732,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Noms*</label>
                 <input
                   type="text"
+                  value={formData.last_name || ''}
+                  onChange={(e) => updateFormData('last_name', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Votre nom de famille"
                   required
@@ -489,6 +744,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Prénoms*</label>
                 <input
                   type="text"
+                  value={formData.first_name || ''}
+                  onChange={(e) => updateFormData('first_name', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Vos prénoms"
                   required
@@ -499,6 +756,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">E-mail*</label>
                 <input
                   type="email"
+                  value={formData.email || ''}
+                  onChange={(e) => updateFormData('email', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="votre.email@exemple.com"
                   required
@@ -509,6 +768,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Numéro de téléphone*</label>
                 <input
                   type="tel"
+                  value={formData.phone || ''}
+                  onChange={(e) => updateFormData('phone', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="+237 6XX XXX XXX"
                   required
@@ -523,6 +784,8 @@ const Authentification = () => {
                 <div style={{ position: 'relative' }}>
                   <input
                     type={formData.showPassword ? 'text' : 'password'}
+                    value={formData.password || ''}
+                    onChange={(e) => updateFormData('password', e.target.value)}
                     placeholder="Mot de passe sécurisé"
                     style={{ paddingRight: '40px' }}
                     className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
@@ -553,6 +816,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Confirmer le mot de passe*</label>
                 <input
                   type="password"
+                  value={formData.confirmPassword || ''}
+                  onChange={(e) => updateFormData('confirmPassword', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Confirmez votre mot de passe"
                   required
@@ -562,7 +827,7 @@ const Authentification = () => {
             </div>
           </div>
 
-          <hr />
+          <hr className="" />
 
           {/* Étape 2 - Règlementation */}
           <div>
@@ -575,7 +840,7 @@ const Authentification = () => {
             </p>
           </div>
 
-          <hr />
+          <hr className="" />
 
           {/* Étape 3 - Informations supplémentaires */}
           <div>
@@ -588,10 +853,7 @@ const Authentification = () => {
               <div>
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Comment avez-vous connu KmrCare?</label>
                 <select 
-                  value={formData.discovery_source || ''}
-                  onChange={(e) => updateFormData('discovery_source', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
-                  disabled={isLoading}
                 >
                   <option value="">Sélectionnez une option</option>
                   <option value="TikTok">TikTok</option>
@@ -672,7 +934,7 @@ const Authentification = () => {
           <h1 className="text-3xl font-bold text-[#0f425d]">Votre profil en trois étapes</h1>
         </div>
 
-        <form onSubmit={(e) => { e.preventDefault(); }} className="space-y-8">
+        <form onSubmit={(e) => { e.preventDefault(); handleSubmit('register-dispensary'); }} className="space-y-8">
           {/* Étape 1 - Responsable */}
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -700,6 +962,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Prénoms*</label>
                 <input
                   type="text"
+                  value={formData.manager_first_name || ''}
+                  onChange={(e) => updateFormData('manager_first_name', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Prénoms du responsable"
                   required
@@ -710,6 +974,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">E-mail*</label>
                 <input
                   type="email"
+                  value={formData.email || ''}
+                  onChange={(e) => updateFormData('email', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="email.professionnel@exemple.com"
                   required
@@ -720,6 +986,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Numéro de téléphone*</label>
                 <input
                   type="tel"
+                  value={formData.phone || ''}
+                  onChange={(e) => updateFormData('phone', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="+237 6XX XXX XXX"
                   required
@@ -734,6 +1002,8 @@ const Authentification = () => {
                 <div style={{ position: 'relative' }}>
                   <input
                     type={formData.showPassword ? 'text' : 'password'}
+                    value={formData.password || ''}
+                    onChange={(e) => updateFormData('password', e.target.value)}
                     placeholder="Mot de passe sécurisé"
                     style={{ paddingRight: '40px' }}
                     className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
@@ -764,6 +1034,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Confirmer votre mot de passe*</label>
                 <input
                   type="password"
+                  value={formData.confirmPassword || ''}
+                  onChange={(e) => updateFormData('confirmPassword', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Confirmez votre mot de passe"
                   required
@@ -773,7 +1045,7 @@ const Authentification = () => {
             </div>
           </div>
 
-          <hr />
+          <hr className="" />
 
           {/* Étape 2 - Informations Dispensaire */}
           <div>
@@ -787,6 +1059,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Nom Officiel du Dispensaire*</label>
                 <input
                   type="text"
+                  value={formData.dispensary_name || ''}
+                  onChange={(e) => updateFormData('dispensary_name', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Nom officiel du dispensaire"
                   required
@@ -809,6 +1083,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Quartier*</label>
                 <input
                   type="text"
+                  value={formData.quartier || ''}
+                  onChange={(e) => updateFormData('quartier', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Quartier où se trouve le dispensaire"
                   required
@@ -819,6 +1095,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Adresse Complète*</label>
                 <input
                   type="text"
+                  value={formData.address || ''}
+                  onChange={(e) => updateFormData('address', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Adresse complète du dispensaire"
                   required
@@ -829,6 +1107,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Téléphone du Dispensaire*</label>
                 <input
                   type="tel"
+                  value={formData.dispensary_phone || ''}
+                  onChange={(e) => updateFormData('dispensary_phone', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="+237 6XX XXX XXX"
                   required
@@ -839,17 +1119,21 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Email du Dispensaire*</label>
                 <input
                   type="email"
+                  value={formData.dispensary_email || ''}
+                  onChange={(e) => updateFormData('dispensary_email', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="contact@dispensaire.com"
                   required
                   disabled={isLoading}
                 />
               </div>
+              </div>
               <div>
-                <label className="block mb-2 text-sm font-medium text-[#0f425d]">Logo du Dispensaire</label>
+                <label className="block mb-2 text-sm font-medium text-[#0f425d]">Logo du Dispensaire*</label>
                 <input
                   type="file"
-                  onChange={(e) => updateFormData('logo', e.target.files[0])}
+                  value={formData.logo || ''}
+                  onChange={(e) => updateFormData('logo', e.target.value)}
                   className="w-full px-4 py-3 bg-[#4356617e] rounded-lg focus:border-[#4356614d] transition-colors"
                   accept="image/*"
                   disabled={isLoading}
@@ -859,6 +1143,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Horaires d&apos;Ouverture*</label>
                 <input
                   type="time"
+                  value={formData.opening_hours || ''}
+                  onChange={(e) => updateFormData('opening_hours', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   required
                   disabled={isLoading}
@@ -868,6 +1154,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Horaires de Fermeture*</label>
                 <input
                   type="time"
+                  value={formData.closing_hours || ''}
+                  onChange={(e) => updateFormData('closing_hours', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   required
                   disabled={isLoading}
@@ -876,7 +1164,7 @@ const Authentification = () => {
             </div>
           </div>
 
-          <hr />
+          <hr className="" />
 
           {/* Étape 3 - Services */}
           <div>
@@ -909,6 +1197,8 @@ const Authentification = () => {
               <div>
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Description (optionnel)</label>
                 <textarea
+                  value={formData.description || ''}
+                  onChange={(e) => updateFormData('description', e.target.value)}
                   rows="3"
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                   placeholder="Description des services offerts..."
@@ -952,7 +1242,9 @@ const Authentification = () => {
               <div className="flex items-start gap-3">
                 <input 
                   type="checkbox" 
-                  id="disp-privacy"
+                  id="disp-privacy" 
+                  checked={formData.acceptPrivacy || false}
+                  onChange={(e) => updateFormData('acceptPrivacy', e.target.checked)}
                   required 
                   className="mt-1" 
                   disabled={isLoading}
@@ -1014,47 +1306,34 @@ const Authentification = () => {
         style={{ backgroundImage: `url('https://images.unsplash.com/photo-1551192422-6ea7bd54a7a8?q=80&w=2070&auto=format&fit=crop')` }}
       />
       
-      <div className="relative z-10 w-full max-w-2xl bg-white/95 backdrop-blur rounded-xl shadow-xl p-8 text-center">
+      <div
+        className="relative z-10 w-full max-w-2xl bg-white/95 backdrop-blur rounded-xl shadow-xl p-8 text-center"
+      >
         <Link to="/">
           <img src="/assets/logo.png" alt="KmrCare Logo" className="h-16 w-auto mx-auto mb-6" />
         </Link>
         
-        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg className="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
+        <h2 className="text-3xl font-bold text-[#0b9444] mb-6">
+          Merci d&apos;avoir soumis votre demande d&apos;inscription !
+        </h2>
+        
+        <div className="text-gray-700 leading-relaxed mb-8 space-y-4">
+          <p>
+            Votre demande pour le dispensaire <strong>[Nom du Dispensaire]</strong> est en cours d&apos;examen. 
+            Vous recevrez un email à <strong>[Email du Responsable]</strong> vous informant de l&apos;état de votre inscription 
+            dans un délai de <strong>3-5 jours ouvrables</strong>.
+          </p>
+          <p className="font-semibold text-[#0f425d]">
+            Veuillez vérifier votre dossier de courrier indésirable (spam).
+          </p>
         </div>
-        
-        <h1 className="text-3xl font-bold text-[#0f425d] mb-4">
-          Demande Envoyée !
-        </h1>
-        
-        <p className="text-gray-600 mb-8 leading-relaxed">
-          Votre demande d&apos;inscription a été envoyée avec succès à notre équipe d&apos;administration. 
-          Nous examinerons votre dossier dans les plus brefs délais et vous contacterons par email 
-          pour vous informer de la suite.
-        </p>
-        
-        <div className="bg-blue-50 rounded-lg p-6 mb-8">
-          <h3 className="font-semibold text-[#0f425d] mb-2">Prochaines étapes :</h3>
-          <ul className="text-sm text-gray-600 text-left space-y-2">
-            <li>• Vérification de vos informations par notre équipe</li>
-            <li>• Validation de votre dispensaire</li>
-            <li>• Création de votre compte professionnel</li>
-            <li>• Email de confirmation avec vos accès</li>
-          </ul>
-        </div>
-        
+
         <button
-          onClick={() => navigateTo('login')}
-          className="w-full py-3 bg-[#0b9444] text-white font-semibold rounded-lg hover:bg-[#0a7c3a] transition-colors duration-200"
+          onClick={() => navigateTo('landing')}
+          className="px-8 py-4 bg-[#0b9444] text-white font-semibold rounded-lg hover:bg-[#0a7c3a] transition-all duration-300 hover:scale-[1.01]"
         >
-          Retour à la connexion
+          Cliquer ici pour accéder à la page d&apos;accueil
         </button>
-        
-        <p className="text-center text-gray-500 text-sm mt-8">
-          © KmrCare@2025. Tous droits réservés
-        </p>
       </div>
     </div>
   );
@@ -1066,6 +1345,12 @@ const Authentification = () => {
         return <LandingPage />;
       case 'login':
         return <LoginPage />;
+      case 'forgot-password-email':
+        return <ForgotPasswordEmailPage />;
+      case 'forgot-password-code':
+        return <ForgotPasswordCodePage />;
+      case 'forgot-password-reset':
+        return <ForgotPasswordResetPage />;
       case 'register-patient':
         return <RegisterPatientPage />;
       case 'register-dispensary':
@@ -1080,7 +1365,8 @@ const Authentification = () => {
   return (
     <div className="font-poppins">
       <AnimatePresence mode="wait">
-        <div>
+        <div
+        >
           {renderCurrentPage()}
         </div>
       </AnimatePresence>

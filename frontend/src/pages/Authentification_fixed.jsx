@@ -338,6 +338,8 @@ const Authentification = () => {
             <input
               type="email"
               id="login-email"
+              value={formData.email || ''}
+              onChange={(e) => updateFormData('email', e.target.value)}
               className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
               placeholder="Votre adresse email"
               required
@@ -353,6 +355,8 @@ const Authentification = () => {
               <input
                 type={formData.showPassword ? 'text' : 'password'}
                 id="login-password"
+                value={formData.password || ''}
+                onChange={(e) => updateFormData('password', e.target.value)}
                 placeholder="Entrez votre mot de passe"
                 style={{ paddingRight: '40px' }}
                 className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
@@ -479,6 +483,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Noms*</label>
                 <input
                   type="text"
+                  value={formData.last_name || ''}
+                  onChange={(e) => updateFormData('last_name', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Votre nom de famille"
                   required
@@ -489,6 +495,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Prénoms*</label>
                 <input
                   type="text"
+                  value={formData.first_name || ''}
+                  onChange={(e) => updateFormData('first_name', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Vos prénoms"
                   required
@@ -499,6 +507,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">E-mail*</label>
                 <input
                   type="email"
+                  value={formData.email || ''}
+                  onChange={(e) => updateFormData('email', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="votre.email@exemple.com"
                   required
@@ -509,6 +519,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Numéro de téléphone*</label>
                 <input
                   type="tel"
+                  value={formData.phone || ''}
+                  onChange={(e) => updateFormData('phone', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="+237 6XX XXX XXX"
                   required
@@ -523,6 +535,8 @@ const Authentification = () => {
                 <div style={{ position: 'relative' }}>
                   <input
                     type={formData.showPassword ? 'text' : 'password'}
+                    value={formData.password || ''}
+                    onChange={(e) => updateFormData('password', e.target.value)}
                     placeholder="Mot de passe sécurisé"
                     style={{ paddingRight: '40px' }}
                     className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
@@ -553,6 +567,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Confirmer le mot de passe*</label>
                 <input
                   type="password"
+                  value={formData.confirmPassword || ''}
+                  onChange={(e) => updateFormData('confirmPassword', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Confirmez votre mot de passe"
                   required
@@ -700,6 +716,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Prénoms*</label>
                 <input
                   type="text"
+                  value={formData.manager_first_name || ''}
+                  onChange={(e) => updateFormData('manager_first_name', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Prénoms du responsable"
                   required
@@ -710,6 +728,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">E-mail*</label>
                 <input
                   type="email"
+                  value={formData.email || ''}
+                  onChange={(e) => updateFormData('email', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="email.professionnel@exemple.com"
                   required
@@ -720,6 +740,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Numéro de téléphone*</label>
                 <input
                   type="tel"
+                  value={formData.phone || ''}
+                  onChange={(e) => updateFormData('phone', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="+237 6XX XXX XXX"
                   required
@@ -734,6 +756,8 @@ const Authentification = () => {
                 <div style={{ position: 'relative' }}>
                   <input
                     type={formData.showPassword ? 'text' : 'password'}
+                    value={formData.password || ''}
+                    onChange={(e) => updateFormData('password', e.target.value)}
                     placeholder="Mot de passe sécurisé"
                     style={{ paddingRight: '40px' }}
                     className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
@@ -764,6 +788,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Confirmer votre mot de passe*</label>
                 <input
                   type="password"
+                  value={formData.confirmPassword || ''}
+                  onChange={(e) => updateFormData('confirmPassword', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Confirmez votre mot de passe"
                   required
@@ -787,6 +813,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Nom Officiel du Dispensaire*</label>
                 <input
                   type="text"
+                  value={formData.dispensary_name || ''}
+                  onChange={(e) => updateFormData('dispensary_name', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Nom officiel du dispensaire"
                   required
@@ -809,6 +837,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Quartier*</label>
                 <input
                   type="text"
+                  value={formData.quartier || ''}
+                  onChange={(e) => updateFormData('quartier', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Quartier où se trouve le dispensaire"
                   required
@@ -819,6 +849,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Adresse Complète*</label>
                 <input
                   type="text"
+                  value={formData.address || ''}
+                  onChange={(e) => updateFormData('address', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="Adresse complète du dispensaire"
                   required
@@ -829,6 +861,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Téléphone du Dispensaire*</label>
                 <input
                   type="tel"
+                  value={formData.dispensary_phone || ''}
+                  onChange={(e) => updateFormData('dispensary_phone', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="+237 6XX XXX XXX"
                   required
@@ -839,6 +873,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Email du Dispensaire*</label>
                 <input
                   type="email"
+                  value={formData.dispensary_email || ''}
+                  onChange={(e) => updateFormData('dispensary_email', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   placeholder="contact@dispensaire.com"
                   required
@@ -859,6 +895,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Horaires d&apos;Ouverture*</label>
                 <input
                   type="time"
+                  value={formData.opening_hours || ''}
+                  onChange={(e) => updateFormData('opening_hours', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   required
                   disabled={isLoading}
@@ -868,6 +906,8 @@ const Authentification = () => {
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Horaires de Fermeture*</label>
                 <input
                   type="time"
+                  value={formData.closing_hours || ''}
+                  onChange={(e) => updateFormData('closing_hours', e.target.value)}
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
                   required
                   disabled={isLoading}
@@ -909,6 +949,8 @@ const Authentification = () => {
               <div>
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Description (optionnel)</label>
                 <textarea
+                  value={formData.description || ''}
+                  onChange={(e) => updateFormData('description', e.target.value)}
                   rows="3"
                   className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:ring-[#159eec] focus:border-[#159eec] transition-colors"
                   placeholder="Description des services offerts..."
@@ -952,7 +994,9 @@ const Authentification = () => {
               <div className="flex items-start gap-3">
                 <input 
                   type="checkbox" 
-                  id="disp-privacy"
+                  id="disp-privacy" 
+                  checked={formData.acceptPrivacy || false}
+                  onChange={(e) => updateFormData('acceptPrivacy', e.target.checked)}
                   required 
                   className="mt-1" 
                   disabled={isLoading}

@@ -1,0 +1,151 @@
+# ==============================
+# Backend Django - À NE PAS VERSIONNER
+# ==============================
+# Ignore tout le dossier backend pour éviter le versioning du code serveur
+backend/
+
+# ==============================
+# Dependencies et modules Node.js
+# ==============================
+frontend/node_modules/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==============================
+# Build et distribution
+# ==============================
+frontend/dist/
+frontend/build/
+dist/
+build/
+
+# ==============================
+# Environnement et configuration sensible
+# ==============================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# ==============================
+# Cache et fichiers temporaires
+# ==============================
+.cache/
+.parcel-cache/
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+*.tmp
+*.temp
+.temp/
+.tmp/
+
+# ==============================
+# Logs
+# ==============================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ==============================
+# OS et éditeurs
+# ==============================
+# Windows
+Thumbs.db
+Desktop.ini
+*.stackdump
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+# Linux
+*~
+.nfs*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ==============================
+# Couverture de tests
+# ==============================
+coverage/
+*.lcov
+.nyc_output/
+
+# ==============================
+# Storybook
+# ==============================
+storybook-static/
+
+# ==============================
+# Divers
+# ==============================
+.sass-cache/
+.connect.lock
+.coverage
+.nyc_output
+.grunt
+bower_components
+.lock-wscript
+build/Release
+node_modules/
+jspm_packages/
+typings/
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+.yarn-integrity
+.yarn-debug.log*
+.yarn-error.log*
+
+# ==============================
+# Configuration spécifique au projet
+# ==============================
+# Fichiers de configuration locale
+config.local.js
+config.local.json
+
+# Base de données locale
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads et fichiers utilisateur
+uploads/
+public/uploads/
+frontend/public/uploads/
+
+# ==============================
+# Documentation générée
+# ==============================
+docs/build/
+
+# ==============================
+# IMPORTANT : Configuration d'intégration autorisée
+# ==============================
+# Ces fichiers de configuration frontend sont autorisés pour l'intégration
+!frontend/.env.example
+!frontend/vite.config.js
+!frontend/package.json
+!frontend/src/_lib/api.js
+!frontend/src/_lib/*Service.js

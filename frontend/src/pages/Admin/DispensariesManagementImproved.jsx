@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { motion } from "motion/react";
 import { useUI, useNotify, useDispensaires, usePreferences } from "../../_store";
 import { useListManagement } from "../../hooks/useComposedStores";
+import { useDispensaryAPI } from "../../_lib/dispensaryService";
 
 const DispensariesManagementImproved = () => {
   // Utilisation des nouveaux stores
@@ -22,6 +23,9 @@ const DispensariesManagementImproved = () => {
   const { isLoading, setLoading } = useUI();
   const { showModal, hideModal, isModalOpen } = useUI();
   
+  // API service pour les dispensaires
+  const dispensaryAPI = useDispensaryAPI();
+  
   // Gestion des listes avec les nouveaux hooks
   const {
     filters,
@@ -34,38 +38,6 @@ const DispensariesManagementImproved = () => {
     showGridLines
   } = useListManagement('dispensaires');
 
-  // Données fictives pour l'exemple
-  const mockDispensaries = [
-    {
-      id: 1,
-      name: "Dispensaire Central Akwa",
-      address: "Rue de la République, Akwa",
-      manager: "Dr. Marie Kouam",
-      phone: "+237 690 123 456",
-      email: "akwa@kmrcare.com",
-      status: "active",
-      capacity: 150,
-      currentPatients: 89,
-      services: ["Consultation", "Urgences", "Laboratoire"],
-      createdAt: "2024-01-15",
-      lastUpdate: "2025-01-03"
-    },
-    {
-      id: 2,
-      name: "Dispensaire Bonanjo",
-      address: "Avenue Charles de Gaulle, Bonanjo",
-      manager: "Dr. Paul Mboma",
-      phone: "+237 690 123 457",
-      email: "bonanjo@kmrcare.com",
-      status: "active",
-      capacity: 120,
-      currentPatients: 67,
-      services: ["Prénatal", "Pédiatrie", "Vaccination"],
-      createdAt: "2024-02-01",
-      lastUpdate: "2025-01-02"
-    }
-  ];
-
   // Chargement initial des données
   useEffect(() => {
     loadDispensaries();
@@ -77,14 +49,81 @@ const DispensariesManagementImproved = () => {
     setLoading('dispensaires', true);
     
     try {
-      // Simulation d'un délai de chargement
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setDispensaires(mockDispensaries);
-      notify.success('Dispensaires chargés avec succès');
-      
+      const data = await dispensaryAPI.loadDispensaries();
+      setDispensaires(data);
     } catch (error) {
-      notify.error('Erreur lors du chargement des dispensaires');
+      // L'erreur est déjà gérée dans le service API
+      console.error('Erreur lors du chargement:', error);
+    } finally {
+      setLoading('dispensaires', false);
+    }
+  };
+
+  // Fonction pour créer un nouveau dispensaire
+  const handleCreateDispensary = async (dispensaryData) => {
+    try {
+      setLoading('create_dispensary', true);
+      const newDispensary = await dispensaryAPI.saveDispensary(dispensaryData, false);
+      addDispensaire(newDispensary);
+      hideModal();
+    } catch (error) {
+      console.error('Erreur lors de la création:', error);
+    } finally {
+      setLoading('create_dispensary', false);
+    }
+  };
+
+  // Fonction pour mettre à jour un dispensaire
+  const handleUpdateDispensary = async (id, updateData) => {
+    try {
+      setLoading('update_dispensary', true);
+      const updatedDispensary = await dispensaryAPI.saveDispensary({ id, ...updateData }, true);
+      updateDispensaire(id, updatedDispensary);
+      hideModal();
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour:', error);
+    } finally {
+      setLoading('update_dispensary', false);
+    }
+  };
+
+  // Fonction pour supprimer un dispensaire
+  const handleDeleteDispensary = async (id) => {
+    if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce dispensaire ?')) {
+      return;
+    }
+
+    try {
+      setLoading('delete_dispensary', true);
+      await dispensaryAPI.deleteDispensary(id);
+      removeDispensaire(id);
+    } catch (error) {
+      console.error('Erreur lors de la suppression:', error);
+    } finally {
+      setLoading('delete_dispensary', false);
+    }
+  };
+
+  // Fonction pour exporter les données
+  const handleExportDispensaries = async () => {
+    try {
+      setLoading('export_dispensaries', true);
+      await dispensaryAPI.exportDispensaries(filteredDispensaires, 'csv');
+    } catch (error) {
+      console.error('Erreur lors de l\'export:', error);
+    } finally {
+      setLoading('export_dispensaries', false);
+    }
+  };
+
+  // Fonction pour rafraîchir les données
+  const handleRefresh = async () => {
+    setLoading('dispensaires', true);
+    try {
+      const data = await dispensaryAPI.loadDispensaries();
+      setDispensaires(data);
+    } catch (error) {
+      console.error('Erreur lors du rafraîchissement:', error);
     } finally {
       setLoading('dispensaires', false);
     }
