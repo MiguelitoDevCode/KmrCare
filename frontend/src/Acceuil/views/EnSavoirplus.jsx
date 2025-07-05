@@ -393,13 +393,6 @@ const EnSavoirPlus = () => {
               >
                 🏥 Voir les Dispensaires
               </Link>
-              
-              <Link
-                to="/"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-[#0f425d] text-[#0f425d] font-semibold rounded-xl hover:bg-[#0f425d] hover:text-white transition-all duration-200 hover:scale-105"
-              >
-                📅 Prendre RDV Maintenant
-              </Link>
             </div>
           </div>
         </motion.div>

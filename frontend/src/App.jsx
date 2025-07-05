@@ -11,15 +11,31 @@ import NotFound from "./pages/NotFound";
 import gsap from "gsap";
 import { DivWrapper } from "./Acceuil/views/DivWrapper";
 import Medecins from "./pages/DocDashboard";
+import UserPreferences from "./pages/UserPreferences";
 
 // Import des guards et composants d'authentification
 import { AuthGuard, AdminGuard, DoctorGuard, GuestGuard } from "./guards";
 import AuthProvider from "./components/AuthProvider";
 import RouteRedirect from "./components/RouteRedirect";
 
+// Import du système de notifications global
+import NotificationCenter from "./components/ui/NotificationCenter";
+
+// Import de l'Error Boundary global
+import ErrorBoundary from "./components/ErrorBoundary";
+
+// Import des utilitaires de store pour l'initialisation
+import { initializeStores } from "./_store";
+import { useEffect } from "react";
+
 const AppContent = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+
+  // Initialiser les stores au démarrage de l'application
+  useEffect(() => {
+    initializeStores();
+  }, []);
 
   useGSAP(() => {
     if (isHomePage) {
@@ -59,6 +75,10 @@ const AppContent = () => {
     <div>
       {isHomePage && <Load/>}        
       <RouteRedirect />
+      
+      {/* Centre de notifications global */}
+      <NotificationCenter />
+      
       <Routes>
         {/* Routes publiques */}
         <Route path="/" element={<Accueil />} />
@@ -106,6 +126,16 @@ const AppContent = () => {
           } 
         />
         
+        {/* Route de préférences - nécessite une authentification */}
+        <Route 
+          path="/preferences" 
+          element={
+            <AuthGuard>
+              <UserPreferences />
+            </AuthGuard>
+          } 
+        />
+        
         {/* Route 404 - doit être en dernier */}
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -115,11 +145,13 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <Router>
-      <AuthProvider>
-        <AppContent />
-      </AuthProvider>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </Router>
+    </ErrorBoundary>
   )
 };
 

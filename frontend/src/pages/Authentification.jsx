@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Link } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 const Authentification = () => {
   // États pour la gestion des pages et formulaires
@@ -9,6 +10,47 @@ const Authentification = () => {
   const [pageHistory, setPageHistory] = useState(['login']);
   const [formData, setFormData] = useState({});
   const [carouselIndex, setCarouselIndex] = useState(0);
+   
+
+  //Gestion des Input de mot de passe
+  const PasswordInput = () => {
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+    };
+
+    return (
+      <div style={{ position: 'relative' }}>
+        <input
+          type={showPassword ? 'text' : 'password'}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Entrez votre mot de passe"
+          style={{ paddingRight: '40px' }}
+          className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
+        />
+        <button
+        type="button"
+        onClick={togglePasswordVisibility}
+        style={{
+            position: 'absolute',
+            right: '10px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            fontSize: '1.2rem',
+            color: '#666',
+          }}
+        >
+          {showPassword ? <EyeOff /> : <Eye />}
+        </button>
+      </div>
+    );
+  };
 
   // Données du carrousel médical
   const carouselData = [
@@ -189,31 +231,33 @@ const Authentification = () => {
             <label htmlFor="login-password" className="block mb-2 text-sm font-medium text-[#0f425d]">
               Mot de passe
             </label>
-            <input
-              type="password"
-              id="login-password"
-              className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
-              placeholder="••••••••"
-              required
-            />
+            <PasswordInput/>
           </div>
 
           <div className="text-right">
             <button
               type="button"
               onClick={() => navigateTo('forgot-password-email')}
-              className="text-[#0b9444] hover:text-[#0a7c3a] font-medium text-sm transition-colors"
+              className="text-[#0b9444] hover:text-[#0a7c3a] font-medium text-sm transition-colors cursor-pointer"
             >
               Mot de passe oublié ?
             </button>
           </div>
 
+          <div className="flex col-2 gap-4">
+            <button
+            type="submit"
+            className="w-full py-3 bg-[#0b9444] text-white font-semibold rounded-lg hover:bg-[#0a7c47] transition-all duration-300 hover:scale-[1.01]"
+          >
+            Connexion Patient
+          </button>
           <button
             type="submit"
-            className="w-full py-3 bg-[#0b9444] text-white font-semibold rounded-lg hover:bg-[#0a7c3a] transition-all duration-300 hover:scale-[1.01]"
+            className="w-full py-3 bg-secondary text-white font-semibold rounded-lg hover:bg-blue-800 transition-all duration-300 hover:scale-[1.01]"
           >
-            Se connecter
+            Connexion Medecin
           </button>
+          </div>
 
           <p className="text-center text-gray-600">
             Vous n&apos;avez pas de compte ?{' '}
@@ -370,22 +414,12 @@ const Authentification = () => {
         <form onSubmit={(e) => { e.preventDefault(); handleSubmit('forgot-reset'); }} className="space-y-6">
           <div>
             <label className="block mb-2 text-sm font-medium text-[#0f425d]">Nouveau mot de passe</label>
-            <input
-              type="password"
-              placeholder="Nouveau mot de passe"
-              className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
-              required
-            />
+            <PasswordInput/>
           </div>
 
           <div>
             <label className="block mb-2 text-sm font-medium text-[#0f425d]">Confirmer votre mot de passe</label>
-            <input
-              type="password"
-              placeholder="Confirmer votre mot de passe"
-              className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
-              required
-            />
+            <PasswordInput/>
           </div>
           
           <button
@@ -466,12 +500,7 @@ const Authentification = () => {
             
             <div className="mt-4">
               <label className="block mb-2 text-sm font-medium text-[#0f425d]">Créer un mot de passe*</label>
-              <input
-                type="password"
-                placeholder="Créer un mot de passe"
-                className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
-                required
-              />
+              <PasswordInput/>
             </div>
           </div>
 
@@ -610,21 +639,11 @@ const Authentification = () => {
             <div className="grid md:grid-cols-2 gap-4 mt-4">
               <div>
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Créer un mot de passe*</label>
-                <input
-                  type="password"
-                  placeholder="Créer un mot de passe"
-                  className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
-                  required
-                />
+                <PasswordInput/>
               </div>
               <div>
                 <label className="block mb-2 text-sm font-medium text-[#0f425d]">Confirmer votre mot de passe*</label>
-                <input
-                  type="password"
-                  placeholder="Confirmer votre mot de passe"
-                  className="w-full px-4 py-3 text-[#0f425d] border rounded-lg focus:border-[#4356614d] transition-colors"
-                  required
-                />
+                <PasswordInput/>
               </div>
             </div>
           </div>
